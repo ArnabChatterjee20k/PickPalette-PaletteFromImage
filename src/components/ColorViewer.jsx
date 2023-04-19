@@ -1,4 +1,5 @@
 import { useState } from "react";
+import styled,{keyframes} from "styled-components";
 
 export default function ColorViewer({ color }) {
   const initialText = "copy";
@@ -20,13 +21,28 @@ export default function ColorViewer({ color }) {
       onMouseLeave={leaveHandler}
     >
       {display && (
-        <div
+        <Clipboard
           onClick={clickHandler}
-          className="w-full h-full rounded flex justify-center items-center bg-slate-50 absolute"
+          className="w-full h-full rounded flex justify-center items-center bg-slate-100 absolute"
         >
           <p className="text-black">{defaultText}</p>
-        </div>
+        </Clipboard>
       )}
     </div>
   );
 }
+
+const fade_in = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
+
+const Clipboard = styled.div`
+  animation: ${fade_in} 100ms linear;
+`
