@@ -11,7 +11,7 @@ export default function Palette({ colors, paletteTitle }) {
       <h5 class="mb-3 text-base font-semibold text-gray-900 md:text-xl dark:text-white">
         {paletteTitle}
       </h5>
-      <PaletteItem className={isMobile ? "flex gap-12 flex-wrap w-sm" : ""}>
+      <PaletteItem className={isMobile ? "flex items-end justify-center gap-2" : ""}>
         {colors.map((color) => {
           if (isMobile) return <MobilePalette color={color} />;
           return <DesktopPalette color={color} />;
@@ -23,9 +23,9 @@ export default function Palette({ colors, paletteTitle }) {
 
 function MobilePalette({ color }) {
   return (
-    <>
-      <ColorViewer color={color} className={"w-5 h-5"} />
-    </>
+    <div>
+      <ColorViewer color={color} className={"w-10 h-10 "} />
+    </div>
   );
 }
 
@@ -48,8 +48,8 @@ function DesktopPalette({ color }) {
 
 function PaletteItem({ children, className }) {
   return (
-    <ul className={`my-4 space-y-3 ${className}`}>
+    <div className={`my-4 space-y-3 ${className}`}>
       {children}
-    </ul>
+    </div>
   );
 }
