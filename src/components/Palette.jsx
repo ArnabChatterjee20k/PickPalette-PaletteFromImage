@@ -2,6 +2,7 @@ import React from "react";
 import CopyIcon from "./CopyIcon";
 import useMediaQuery from "../hooks/useMediaQuery";
 import ColorViewer from "./ColorViewer";
+import getContrastingColor from "../utils/getContrastingColor";
 
 export default function Palette({ colors, paletteTitle }) {
   const isMobile = useMediaQuery("(max-width:400px)");
@@ -29,15 +30,16 @@ function MobilePalette({ color }) {
 }
 
 function DesktopPalette({ color }) {
+  const textColor = getContrastingColor(color)
   return (
     <>
       <button
         className={`flex w-full justify-between items-center p-3 text-base font-bold text-gray-900 rounded-lg group hover:shadow`}
         style={{ backgroundColor: color }}
       >
-        <span>MetaMask</span>
+        <span style={{color:textColor}}>{color}</span>
         <span>
-          <CopyIcon />
+          <CopyIcon style={{color:textColor}}/>
         </span>
       </button>
     </>
