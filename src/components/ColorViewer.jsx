@@ -35,7 +35,7 @@ export default function ColorViewer({ color }) {
 const fade_in = keyframes`
   from {
     opacity: 0;
-    transform: translateY(15px);
+    transform: translateY(5px);
   }
   to {
     opacity: 1;
