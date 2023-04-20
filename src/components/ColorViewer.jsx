@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styled,{keyframes} from "styled-components";
 
-export default function ColorViewer({ color }) {
+export default function ColorViewer({ color,clipboard,className }) {
   const initialText = "copy";
   const [defaultText, setDefaultText] = useState(initialText);
   const [display, setDisplay] = useState(false);
@@ -15,12 +15,12 @@ export default function ColorViewer({ color }) {
   };
   return (
     <div
-      className="w-20 h-20 rounded border-2 relative cursor-pointer"
+      className={`w-20 h-20 rounded border-2 relative cursor-pointer ${className}`}
       style={{ backgroundColor: color }}
       onMouseEnter={() => setDisplay(true)}
       onMouseLeave={leaveHandler}
     >
-      {display && (
+      {clipboard && display && (
         <Clipboard
           onClick={clickHandler}
           className="w-full h-full rounded flex justify-center items-center bg-slate-100 absolute"

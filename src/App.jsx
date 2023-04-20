@@ -2,6 +2,7 @@ import React from "react";
 import Container from "./components/Container";
 import Navbar from "./components/Navbar";
 import ImageUpload from "./Page/ImageUpload/ImageUpload";
+import FamousPalettes from "./Page/ImageUpload/Components/FamousPalettes";
 
 export default function App() {
   return (
@@ -9,6 +10,7 @@ export default function App() {
       <Container>
         <Navbar />
         <ImageUpload />
+        <FamousPalettes/>
       </Container>
     </>
   );

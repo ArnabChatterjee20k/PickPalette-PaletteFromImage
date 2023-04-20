@@ -3,8 +3,9 @@ import Heading from "./Components/Heading";
 import UploadButton from "./Components/UploadButton";
 import { ImageContext } from "./Context/ImageContext";
 import ImageViewer from "./Components/ImageViewer";
-import Palette from "../../components/Palette";
 import ColorPaletteHolder from "./Components/ColorPaletteHolder";
+import FamousPalettes from "./Components/FamousPalettes";
+
 export default function ImageUpload() {
   const [uploadedImage, setUploadedImage] = useState(null);
   const [palette, setPalette] = useState([]);
