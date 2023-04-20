@@ -7,7 +7,7 @@ import Arrow from "../../../components/Arrow";
 
 export default function FamousPalettes() {
   const isMobile = useMediaQuery("(max-width:400px)");
-  return <section className="mt-20">
+  return <section className="mt-10">
     {
       isMobile?<MobilePalette/>:<DesktopPalette/>
     }
@@ -16,7 +16,7 @@ export default function FamousPalettes() {
 
 const DesktopPalette = () => {
   const list = ["-rotate-1", "-rotate-1", "rotate-2", "-rotate-2"];
-  <Marquee pauseOnHover gradient={false} speed={80} className={"py-10 w-full"}>
+  return <Marquee pauseOnHover gradient={false} speed={80} className={"py-10 w-full"}>
     {colorPalettes.map(({ name, colors }) => {
       const rotate = list[Math.floor(Math.random() * list.length)];
       return (

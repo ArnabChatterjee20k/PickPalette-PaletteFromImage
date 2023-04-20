@@ -3,6 +3,7 @@ import Container from "./components/Container";
 import Navbar from "./components/Navbar";
 import ImageUpload from "./Page/ImageUpload/ImageUpload";
 import FamousPalettes from "./Page/ImageUpload/Components/FamousPalettes";
+import Divider from "./components/Divider";
 
 export default function App() {
   return (
@@ -10,7 +11,10 @@ export default function App() {
       <Container>
         <Navbar />
         <ImageUpload />
-        <FamousPalettes/>
+        <div className="my-10">
+          <Divider />
+        </div>
+        <FamousPalettes />
       </Container>
     </>
   );
