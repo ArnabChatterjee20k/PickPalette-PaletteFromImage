@@ -4,6 +4,7 @@ import Navbar from "./components/Navbar";
 import ImageUpload from "./Page/ImageUpload/ImageUpload";
 import FamousPalettes from "./Page/ImageUpload/Components/FamousPalettes";
 import Divider from "./components/Divider";
+import Footer from "./components/Footer";
 
 export default function App() {
   return (
@@ -15,6 +16,7 @@ export default function App() {
           <Divider />
         </div>
         <FamousPalettes />
+        <Footer />
       </Container>
     </>
   );
