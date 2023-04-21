@@ -5,7 +5,7 @@ import Footer from "./components/Footer";
 // import ImageUpload from "./Page/ImageUpload/ImageUpload";
 // import Home from "./Page/Home/assets/Home";
 
-const Home = lazy(() => import("./Page/ImageUpload/ImageUpload"));
+const Home = lazy(() => import("./Page/Home/Home"));
 const ImageUpload = lazy(() => import("./Page/ImageUpload/ImageUpload"));
 
 import { BrowserRouter, Route, Routes } from "react-router-dom";
