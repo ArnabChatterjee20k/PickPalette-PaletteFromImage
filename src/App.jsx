@@ -1,21 +1,15 @@
 import React from "react";
 import Container from "./components/Container";
 import Navbar from "./components/Navbar";
-import ImageUpload from "./Page/ImageUpload/ImageUpload";
-import FamousPalettes from "./Page/ImageUpload/Components/FamousPalettes";
-import Divider from "./components/Divider";
 import Footer from "./components/Footer";
+import ImageUpload from "./Page/ImageUpload/ImageUpload";
 
 export default function App() {
   return (
     <>
       <Container>
         <Navbar />
-        <ImageUpload />
-        <div className="my-5">
-          <Divider />
-        </div>
-        <FamousPalettes />
+        <ImageUpload/>
         <Footer />
       </Container>
     </>
