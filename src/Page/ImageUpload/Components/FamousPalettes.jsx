@@ -2,11 +2,11 @@ import React from "react";
 import colorPalettes from "../../../data/colorPalettes";
 import Palette from "../../../components/Palette";
 import Marquee from "react-fast-marquee";
-import useMediaQuery from "../../../hooks/useMediaQuery";
 import Arrow from "../../../components/Arrow";
+import useIsMobile from "../../../hooks/useIsMobile";
 
 export default function FamousPalettes() {
-  const isMobile = useMediaQuery("(max-width:400px)");
+  const isMobile = useIsMobile();
   return <section className={`${isMobile?"my-10":"my-15"}`}>
     {
       isMobile?<MobilePalette/>:<DesktopPalette/>

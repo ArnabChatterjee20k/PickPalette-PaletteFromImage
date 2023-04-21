@@ -1,10 +1,8 @@
 import React from "react";
-import useMediaQuery from "../../../hooks/useMediaQuery";
 import ImageSection from "./ImageSection";
 import HeroText from "./HeroText";
 
 export default function Hero() {
-  const isMobile = useMediaQuery("(max-width:400px)");
   return (
     <>
       <section>

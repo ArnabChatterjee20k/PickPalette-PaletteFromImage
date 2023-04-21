@@ -1,6 +1,8 @@
-import useMediaQuery from "../../../hooks/useMediaQuery";
+import useIsMobile from "../../../hooks/useIsMobile";
+
+
 export function Box({ className }) {
-  const isMobile = useMediaQuery("(max-width:400px)");
+  const isMobile = useIsMobile()
   return (
     <div
       className={`rounded-2xl ${

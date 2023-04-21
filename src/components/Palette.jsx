@@ -1,11 +1,11 @@
 import React from "react";
 import CopyIcon from "./CopyIcon";
-import useMediaQuery from "../hooks/useMediaQuery";
+import useIsMobile from "../hooks/useIsMobile";
 import ColorViewer from "./ColorViewer";
 import getContrastingColor from "../utils/getContrastingColor";
 
 export default function Palette({ colors, paletteTitle }) {
-  const isMobile = useMediaQuery("(max-width:400px)");
+  const isMobile = useIsMobile()
   return (
     <div class="w-full lg:min-w-[24rem] max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 dark:bg-gray-800 dark:border-gray-700">
       <h5 class="mb-3 text-base font-semibold text-gray-900 md:text-xl dark:text-white">
