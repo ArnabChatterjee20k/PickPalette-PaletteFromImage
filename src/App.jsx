@@ -12,7 +12,7 @@ export default function App() {
       <Container>
         <Navbar />
         <ImageUpload />
-        <div className="my-10">
+        <div className="my-5">
           <Divider />
         </div>
         <FamousPalettes />

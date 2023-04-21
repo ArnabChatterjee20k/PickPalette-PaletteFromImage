@@ -7,7 +7,7 @@ import Arrow from "../../../components/Arrow";
 
 export default function FamousPalettes() {
   const isMobile = useMediaQuery("(max-width:400px)");
-  return <section className="mt-10">
+  return <section className={`${isMobile?"my-10":"my-15"}`}>
     {
       isMobile?<MobilePalette/>:<DesktopPalette/>
     }
