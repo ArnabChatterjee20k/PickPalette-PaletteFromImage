@@ -22,8 +22,8 @@ export default function App() {
               <Route path="/generate" element={<ImageUpload />} />
             </Routes>
           </Suspense>
+          <Footer />
         </BrowserRouter>
-        <Footer />
       </Container>
     </>
   );

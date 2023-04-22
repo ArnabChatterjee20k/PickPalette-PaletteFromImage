@@ -2,8 +2,11 @@ import React from "react";
 import getCurrentYear from "../utils/getCurrentYear";
 import { APP_NAME, FOOTER_LINK } from "../data/data";
 import socialLinks from "../data/socialLinks";
+import {useLocation} from "react-router-dom"
 
 export default function Footer() {
+  const location = useLocation()
+  if(location.pathname === "/") return null;
   const year = getCurrentYear();
   return (
     <footer class="mt-4 w-full p-4 bg-white border-t border-gray-200 shadow md:flex md:items-center md:justify-between md:p-6 dark:bg-gray-800 dark:border-gray-600">
