@@ -8,7 +8,7 @@ import navLinks from "../data/navLinks";
 export default function Navbar() {
   const isMobile = useIsMobile();
   return (
-    <nav>
+    <nav className="border-b-2 border-gray-900 shadow-lg">
       <div className="flex justify-between items-center content w-full m-auto px-8 pb-3 pt-5 shadow-sm">
         <Link
           to="/"
