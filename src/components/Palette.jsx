@@ -38,9 +38,6 @@ function DesktopPalette({ color }) {
         style={{ backgroundColor: color }}
       >
         <span style={{color:textColor}}>{color}</span>
-        <span>
-          <CopyIcon style={{color:textColor}}/>
-        </span>
       </button>
     </>
   );
