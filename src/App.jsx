@@ -9,6 +9,7 @@ const Home = lazy(() => import("./Page/Home/Home"));
 const ImageUpload = lazy(() => import("./Page/ImageUpload/ImageUpload"));
 
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import FallbackLoader from "./loaders/FallbackLoader";
 
 export default function App() {
   return (
@@ -16,7 +17,7 @@ export default function App() {
       <Container>
         <BrowserRouter>
           <Navbar />
-          <Suspense fallback={<h1>Loading....</h1>}>
+          <Suspense fallback={<FallbackLoader/>}>
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/generate" element={<ImageUpload />} />
