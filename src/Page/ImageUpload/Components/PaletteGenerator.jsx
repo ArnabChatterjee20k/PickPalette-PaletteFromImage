@@ -9,7 +9,7 @@ export default function PaletteGenerator() {
   const [uploadedImage, setUploadedImage] = useState(null);
   const [palette, setPalette] = useState([]);
   return (
-    <section className="flex flex-col items-center gap-7 px-4 content">
+    <div className="flex flex-col items-center gap-7 px-4 content">
       <ImageContext.Provider value={{ setUploadedImage, setPalette,palette }}>
         {/* {!uploadedImage && <Heading />} */}
         <Heading />
@@ -18,7 +18,7 @@ export default function PaletteGenerator() {
         {/* {uploadedImage && uploadedImage} */}
         <ColorPaletteHolder/>
       </ImageContext.Provider>
-    </section>
+    </div>
   );
 }
 // background: rgba(126,231,135,.54);

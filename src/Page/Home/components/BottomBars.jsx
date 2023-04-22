@@ -1,9 +1,6 @@
 import useIsMobile from "../../../hooks/useIsMobile";
 import { Box } from "./Box";
 
-const max = 400;
-const reducer = 10;
-
 export default function BottomBars() {
   const isMobile = useIsMobile();
   if (isMobile) return null;

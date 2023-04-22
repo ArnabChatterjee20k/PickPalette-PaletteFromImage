@@ -14,8 +14,8 @@ export default function App() {
   return (
     <>
       <Container>
-        <Navbar />
         <BrowserRouter>
+          <Navbar />
           <Suspense fallback={<h1>Loading....</h1>}>
             <Routes>
               <Route path="/" element={<Home />} />
