@@ -7,9 +7,11 @@ import Footer from "./components/Footer";
 
 const Home = lazy(() => import("./Page/Home/Home"));
 const ImageUpload = lazy(() => import("./Page/ImageUpload/ImageUpload"));
-
+const Explore = lazy(() => import("./Page/Explore/Explore"));
+ 
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import FallbackLoader from "./loaders/FallbackLoader";
+ 
 
 export default function App() {
   return (
@@ -21,6 +23,7 @@ export default function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/generate" element={<ImageUpload />} />
+              <Route path="/palettes" element={<Explore />} />
             </Routes>
           </Suspense>
           <Footer />
