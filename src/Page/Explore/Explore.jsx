@@ -34,15 +34,13 @@ export default function Explore() {
   return (
     <PaletteContextProvider lastPaletteReference={lastPaletteRef} >
       <section className="flex min-h-screen flex-col items-center">
+        {isLoading && <Loader/>}
         <div className="w-full mb-auto px-4 py-5 grid grid-cols-1 justify-items-center sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-6 gap-x-12">
-          {isLoading && <Loader/>}
           {isFetched &&
             paletteData.pages.map(({ palettes }) => {
               return palettes.map((colors, index) => {
                 return (
-                  <div>
                     <ColorPalette colors={colors} key={index}/>
-                  </div>
                 );
               });
             })}
@@ -57,7 +55,7 @@ export default function Explore() {
 
 const Loader = () => {
   return (
-    <div className="w-full flex flex-col items-center justify-center pb-10 sm:pb-4">
+    <div className="w-full flex flex-col items-center justify-center my-5 pb-10 sm:pb-4">
       <ScrollLoader />
     </div>
   );

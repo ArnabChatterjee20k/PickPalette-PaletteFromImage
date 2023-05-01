@@ -9,11 +9,10 @@ export default function ColorPalette({ colors }) {
   // console.log({lastPaletteReference,isVisible})
   
   return (
-    <div ref={lastPaletteReference} class="w-full max-w-[22rem] shadow-md overflow-hidden self-start">
+    <div ref={lastPaletteReference} className="w-full max-w-[22rem] shadow-md overflow-hidden self-start">
       <ul class="flex w-full mb-4">
         {colors.map((color, index) => {
           return color ? (
-            <div >
               <PaletteItem
                 key={`${color+index}`}
                 className={`${index === 0 ? "rounded-l" : ""} ${
@@ -21,7 +20,6 @@ export default function ColorPalette({ colors }) {
                 }`}
                 color={color}
               />
-            </div>
           ) : null;
         })}
       </ul>
