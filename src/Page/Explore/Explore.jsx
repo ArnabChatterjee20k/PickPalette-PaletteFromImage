@@ -11,6 +11,7 @@ export default function Explore() {
     fetchNextPage,
     hasNextPage,
     isFetched,
+    isLoading,
     isFetchingNextPage
   } = useColorPalettes();
 
@@ -34,6 +35,7 @@ export default function Explore() {
     <PaletteContextProvider lastPaletteReference={lastPaletteRef} >
       <section className="flex min-h-screen flex-col items-center">
         <div className="w-full mb-auto px-4 py-5 grid grid-cols-1 justify-items-center sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-6 gap-x-12">
+          {isLoading && <Loader/>}
           {isFetched &&
             paletteData.pages.map(({ palettes }) => {
               return palettes.map((colors, index) => {
