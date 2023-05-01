@@ -1,22 +1,28 @@
 import styled from "styled-components";
 import useIsMobile from "../../../hooks/useIsMobile";
 import getContrastingColor from "../../../utils/getContrastingColor";
+import { usePaletteConext } from "../cotext/paletteContext";
 
 export default function ColorPalette({ colors }) {
   const lastIndex = colors.length - 1;
+  const {lastPaletteReference,isVisible} = usePaletteConext()
+  // console.log({lastPaletteReference,isVisible})
+  
   return (
-    <div class="w-full max-w-[22rem] shadow-md overflow-hidden self-start">
+    <div ref={lastPaletteReference} class="w-full max-w-[22rem] shadow-md overflow-hidden self-start">
       <ul class="flex w-full mb-4">
         {colors.map((color, index) => {
-          return (
-            <PaletteItem
-              key={color}
-              className={`${index === 0 ? "rounded-l" : ""} ${
-                index === lastIndex ? "rounded-r" : ""
-              }`}
-              color={color}
-            />
-          );
+          return color ? (
+            <div >
+              <PaletteItem
+                key={`${color+index}`}
+                className={`${index === 0 ? "rounded-l" : ""} ${
+                  index === lastIndex ? "rounded-r" : ""
+                }`}
+                color={color}
+              />
+            </div>
+          ) : null;
         })}
       </ul>
     </div>

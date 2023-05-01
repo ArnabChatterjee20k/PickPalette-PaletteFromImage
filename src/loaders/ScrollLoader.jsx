@@ -3,10 +3,10 @@ import { ThreeCircles } from "react-loader-spinner";
 
 export default function ScrollLoader() {
   return (
-    <div className="w-full justify-center py-6">
+    <>
       <ThreeCircles
-        height="100"
-        width="100"
+        height={30}
+        width={30}
         color="#FFC107"
         wrapperStyle={{}}
         wrapperClass=""
@@ -16,6 +16,6 @@ export default function ScrollLoader() {
         innerCircleColor=""
         middleCircleColor=""
       />
-    </div>
+    </>
   );
 }

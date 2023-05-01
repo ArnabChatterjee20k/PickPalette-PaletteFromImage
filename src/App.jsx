@@ -8,27 +8,33 @@ import Footer from "./components/Footer";
 const Home = lazy(() => import("./Page/Home/Home"));
 const ImageUpload = lazy(() => import("./Page/ImageUpload/ImageUpload"));
 const Explore = lazy(() => import("./Page/Explore/Explore"));
- 
+
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import FallbackLoader from "./loaders/FallbackLoader";
- 
+
+import { ErrorBoundary } from "react-error-boundary";
 
 export default function App() {
   return (
-    <>
-      <Container>
-        <BrowserRouter>
-          <Navbar />
-          <Suspense fallback={<FallbackLoader/>}>
+    <ErrorBoundary FallbackComponent={Fallback}>
+      <BrowserRouter>
+        <Navbar />
+        <Container>
+          <Suspense fallback={<FallbackLoader />}>
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/generate" element={<ImageUpload />} />
               <Route path="/palettes" element={<Explore />} />
             </Routes>
           </Suspense>
-          <Footer />
-        </BrowserRouter>
-      </Container>
-    </>
+        </Container>
+        <Footer />
+      </BrowserRouter>
+    </ErrorBoundary>
   );
+}
+
+function Fallback({error}){
+  console.log(error);
+  return <h1 className="text-lg font-bold">Something went wrong....</h1>
 }
