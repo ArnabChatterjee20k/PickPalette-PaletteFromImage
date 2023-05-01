@@ -7,7 +7,7 @@ export default function useColorPalettes() {
     queryKey:["palettes"],
     queryFn:({pageParam = 1})=>fetchPalettes(pageParam),
     getNextPageParam:({page})=>{
-      return page<=100?page+1:undefined
+      return page<100?page+1:undefined
     },
     refetchOnWindowFocus:false,
     refetchOnMount:false
