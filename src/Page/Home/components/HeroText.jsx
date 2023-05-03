@@ -2,6 +2,7 @@ import React from "react";
 import useIsMobile from "../../../hooks/useIsMobile";
 import GenerateButton from "./Buttons/GenerateButton";
 import ExploreButton from "./Buttons/ExploreButton";
+import Feature from "../../../components/Feature";
 
 export default function HeroText() {
   const isMobile = useIsMobile();
@@ -21,6 +22,7 @@ export default function HeroText() {
         <div className="flex justify-center flex-col gap-3 items-center">
           <GenerateButton />
           <ExploreButton />
+          <Feature />
         </div>
       )}
     </div>
