@@ -1,6 +1,7 @@
 import React from "react";
-import RedirectButton from "./RedirectButton";
 import useIsMobile from "../../../hooks/useIsMobile";
+import GenerateButton from "./Buttons/GenerateButton";
+import ExploreButton from "./Buttons/ExploreButton";
 
 export default function HeroText() {
   const isMobile = useIsMobile();
@@ -16,8 +17,9 @@ export default function HeroText() {
         Unlock the power of color with our innovative palette generator.
       </p>
       {isMobile && (
-        <div className="flex justify-center">
-          <RedirectButton />
+        <div className="flex justify-center flex-col gap-3 items-center">
+          <GenerateButton />
+          <ExploreButton />
         </div>
       )}
     </div>
