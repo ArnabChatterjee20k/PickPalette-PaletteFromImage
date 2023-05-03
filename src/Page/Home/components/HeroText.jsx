@@ -16,6 +16,7 @@ export default function HeroText() {
       <p className="max-w-2xl mb-6 text-center md:text-left font-light text-gray-300 lg:mb-8 md:text-lg lg:text-xl">
         Unlock the power of color with our innovative palette generator.
       </p>
+      {!isMobile && <GenerateButton />}
       {isMobile && (
         <div className="flex justify-center flex-col gap-3 items-center">
           <GenerateButton />

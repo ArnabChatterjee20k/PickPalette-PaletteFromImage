@@ -5,6 +5,8 @@ import useIsMobile from "../../../hooks/useIsMobile";
 import RedirectButton from "../../../components/RedirectButton";
 import CurlyArrow from "../../../components/CurlyArrow"
 import GenerateButton from "./Buttons/GenerateButton";
+import ExploreButton from "./Buttons/ExploreButton";
+
 
 export default function ImageSection() {
   const isMobile = useIsMobile();
@@ -40,7 +42,7 @@ const IllustrativeCurlyArrow = ()=>{
 const IllustrativeButton = () => {
   return (
     <div className="absolute -bottom-8 -left-64 w-36">
-      <GenerateButton/>
+      <ExploreButton/>
     </div>
   );
 };
