@@ -13,6 +13,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import FallbackLoader from "./loaders/FallbackLoader";
 
 import { ErrorBoundary } from "react-error-boundary";
+import NewsLetter from "./Page/NewsLetter/NewsLetter";
 
 export default function App() {
   return (
@@ -25,6 +26,10 @@ export default function App() {
               <Route path="/" element={<Home />} />
               <Route path="/generate" element={<ImageUpload />} />
               <Route path="/palettes" element={<Explore />} />
+              <Route path="/subscribe">
+                <Route path="newsletter" element={<NewsLetter />} />
+              </Route>
+              <Route path="*" element={<h1>Not found</h1>}/>
             </Routes>
           </Suspense>
         </Container>
@@ -34,7 +39,7 @@ export default function App() {
   );
 }
 
-function Fallback({error}){
+function Fallback({ error }) {
   console.log(error);
-  return <h1 className="text-lg font-bold">Something went wrong....</h1>
+  return <h1 className="text-lg font-bold">Something went wrong....</h1>;
 }
