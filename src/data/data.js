@@ -3,3 +3,5 @@ export const FOOTER_LINK = "https://www.linkedin.com/in/arnab-chatterjee-905ab32
 export const ABOUT_LINK = "https://github.com/ArnabChatterjee20k/PickPalette-PaletteFromImage"
 export const PALETTE_API = import.meta.env.VITE_PALETTE_API
 export const API_MAX_PAGE = import.meta.env.VITE_API_MAX_PAGE
+
+export const VITE_NEWSLETTER_API = import.meta.env.VITE_NEWSLETTER_API

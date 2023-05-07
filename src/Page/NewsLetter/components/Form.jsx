@@ -1,12 +1,25 @@
 import React from "react";
+import useSubscribeNewsletter from "../../../services/useSubscribeNewsletter";
+import { useRef } from "react";
+import { toast } from "react-hot-toast";
 
 export default function Form() {
+  const ref =  useRef(null)
+  const {subscribe,status} = useSubscribeNewsletter()
+
+  const handleForm = (e)=>{
+    e.preventDefault();
+    const email = ref.current.value
+    toast.loading("Subscribing....")
+    subscribe(email)
+  }
   return (
-    <form className="mt-6 flex max-w-md gap-x-4">
+    <form className="mt-6 flex max-w-md gap-x-4" onSubmit={handleForm}>
       <label htmlFor="email-address" className="sr-only">
         Email address
       </label>
       <input
+        ref={ref}
         id="email-address"
         name="email"
         type="email"

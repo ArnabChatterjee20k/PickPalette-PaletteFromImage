@@ -15,11 +15,14 @@ import FallbackLoader from "./loaders/FallbackLoader";
 import { ErrorBoundary } from "react-error-boundary";
 import NewsLetter from "./Page/NewsLetter/NewsLetter";
 
+import { Toaster } from 'react-hot-toast';
+
 export default function App() {
   return (
     <ErrorBoundary FallbackComponent={Fallback}>
       <BrowserRouter>
         <Navbar />
+        <Toaster/>
         <Container>
           <Suspense fallback={<FallbackLoader />}>
             <Routes>
