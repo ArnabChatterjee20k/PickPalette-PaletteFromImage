@@ -1,5 +1,7 @@
 import { useEffect } from "react";
 import { useState } from "react";
+import { toast } from "react-hot-toast";
+import CopyIcon from "../components/CopyIcon";
 
 export default function useColorClipboard(initialText="copy",finalText="copied") {
   const [defaultText, setDefaultText] = useState(initialText);
@@ -13,9 +15,20 @@ export default function useColorClipboard(initialText="copy",finalText="copied")
     }
   },[defaultText])
 
-  const clickHandler = async (value="copied value") => {
+  const clickHandler = async (value="copied value",notify=true,notifyMessage="color copied to clipboard") => {
     setDefaultText(finalText);
-    await navigator.clipboard.writeText(value);
+    try {
+      await navigator.clipboard.writeText(value);
+      toast.remove()
+      if(notify) toast.success(notifyMessage,{
+        className:"rounded-xl z-50",position:"bottom-right"
+      })
+    } catch (error) {
+      toast.remove()
+      if(notify) toast.error("Some problem occured",{
+        className:"rounded-xl z-50",position:"bottom-right"
+      })
+    }
   };
   
   const hoverHandler = () => {
