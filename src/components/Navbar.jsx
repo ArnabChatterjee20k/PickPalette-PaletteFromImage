@@ -29,7 +29,7 @@ export default function Navbar() {
 
 const DesktopNav = () => {
   const { pathname } = useLocation();
-  const newsletterActivePath = "/subscribe/newsletter"
+  const newsletterActivePath = "/subscribe/newsletter";
   const isNewsLetterPath = newsletterActivePath === pathname;
   return (
     <div className="flex gap-5 items-start">
@@ -48,12 +48,17 @@ const DesktopNav = () => {
           </Link>
         );
       })}
-      <Link
-        className={`${isNewsLetterPath?"font-extrabold ":"font-semibold"} border-t-gray-500 text-transparent bg-clip-text bg-gradient-to-r from-[#EEAB57] to-[#F7C04A]`}
-        to={"/subscribe/newsletter"}
-      >
-        NewsLetter
-      </Link>
+      <div className="relative">
+        <Link
+          className={`${
+            isNewsLetterPath ? "font-extrabold " : "font-semibold"
+          } border-t-gray-500 text-transparent bg-clip-text bg-gradient-to-r from-[#EEAB57] to-[#F7C04A]`}
+          to={"/subscribe/newsletter"}
+        >
+          NewsLetter
+        </Link>
+        <span className="text-2xl absolute -top-2">🎉</span>
+      </div>
     </div>
   );
 };

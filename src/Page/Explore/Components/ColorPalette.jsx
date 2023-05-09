@@ -2,6 +2,7 @@ import styled from "styled-components";
 import useIsMobile from "../../../hooks/useIsMobile";
 import getContrastingColor from "../../../utils/getContrastingColor";
 import { usePaletteConext } from "../cotext/paletteContext";
+import useColorClipboard from "../../../hooks/useColorClipboard";
 
 export default function ColorPalette({ colors }) {
   const lastIndex = colors.length - 1;
@@ -42,13 +43,16 @@ const Item = styled.li`
 
 const PaletteItem = ({ className, color }) => {
   const isMobile = useIsMobile()
+  const {defaultText , clickHandler} = useColorClipboard(color,"copied")
   return (
     <Item
       color={color}
       className={`h-28 flex justify-center items-center flex-grow basis-[1px] hover:basis-[10rem] cursor-pointer ${className}`}
       style={{ transition: "all 0.1s ease", backgroundColor: color }}
+      onClick={clickHandler}
+
     >
-      <span>{color}</span>
+      <span>{defaultText}</span>
     </Item>
   );
 };

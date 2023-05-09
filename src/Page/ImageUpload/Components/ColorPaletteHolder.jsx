@@ -1,4 +1,4 @@
-import ColorViewer from "../../../components/ColorViewer";
+import ColorViewer from "./ColorViewer";
 import getHex from "../../../utils/getHex";
 import { useImageContext } from "../Context/ImageContext";
 

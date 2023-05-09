@@ -1,7 +1,7 @@
 import React from "react";
 import CopyIcon from "./CopyIcon";
 import useIsMobile from "../hooks/useIsMobile";
-import ColorViewer from "./ColorViewer";
+import ColorViewer from "../Page/ImageUpload/Components/ColorViewer";
 import getContrastingColor from "../utils/getContrastingColor";
 
 export default function Palette({ colors, paletteTitle }) {

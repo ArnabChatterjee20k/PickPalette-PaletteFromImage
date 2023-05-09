@@ -1,28 +1,22 @@
-import { useState } from "react";
 import styled,{keyframes} from "styled-components";
+import useColorClipboard from "../../../hooks/useColorClipboard";
+
 
 export default function ColorViewer({ color,clipboard,className }) {
-  const initialText = "copy";
-  const [defaultText, setDefaultText] = useState(initialText);
-  const [display, setDisplay] = useState(false);
-  const clickHandler = async() => {
-    setDefaultText("copied");
-    await navigator.clipboard.writeText(color);
-  };
-  const leaveHandler = () => {
-    setDefaultText(initialText);
-    setDisplay(false);
-  };
+
+  const {defaultText,clickHandler,leaveHandler,hoverHandler,display} = useColorClipboard(color,"copied")
   return (
     <div
       className={`w-20 h-20 rounded border-2 relative cursor-pointer ${className}`}
       style={{ backgroundColor: color }}
-      onMouseEnter={() => setDisplay(true)}
+      onMouseEnter={hoverHandler}
       onMouseLeave={leaveHandler}
     >
+
+      {/* showing the text overlay */}
       {clipboard && display && (
         <Clipboard
-          onClick={clickHandler}
+          onClick={()=>clickHandler(color)}
           className="w-full h-full rounded flex justify-center items-center bg-slate-100 absolute"
         >
           <p className="text-black">{defaultText}</p>
