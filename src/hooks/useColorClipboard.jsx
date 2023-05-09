@@ -25,9 +25,7 @@ export default function useColorClipboard(initialText="copy",finalText="copied")
       })
     } catch (error) {
       toast.remove()
-      if(notify) toast.error("Some problem occured",{
-        className:"rounded-xl z-50",position:"bottom-right"
-      })
+      if(notify) toast.error("Some problem occured")
     }
   };
   

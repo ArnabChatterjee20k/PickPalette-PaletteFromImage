@@ -23,7 +23,7 @@ export default function MobileNav() {
             );
           })}
           <Item className="border-t font-extrabold border-t-gray-500 text-transparent bg-clip-text bg-gradient-to-r from-[#EEAB57] to-[#F7C04A]">
-            <Link>
+            <Link to="/subscribe/newsletter">
               NewsLetter
             </Link>
           </Item>

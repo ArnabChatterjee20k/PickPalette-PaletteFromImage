@@ -11,7 +11,7 @@ export default function useSubscribeNewsletter(email) {
             toast.success("Subscription Added")
           },
           onError:(error)=>{
-            if(prevToastId) toast.dismiss(prevToastId)
+            toast.remove()
             console.log({error})
             toast.error(error.message)
         },

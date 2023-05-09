@@ -22,7 +22,7 @@ export default function App() {
     <ErrorBoundary FallbackComponent={Fallback}>
       <BrowserRouter>
         <Navbar />
-        <Toaster/>
+        <Toaster toastOptions={{position:"bottom-right"}}/>
         <Container>
           <Suspense fallback={<FallbackLoader />}>
             <Routes>
