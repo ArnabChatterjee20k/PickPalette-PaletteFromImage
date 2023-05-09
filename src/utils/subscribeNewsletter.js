@@ -8,9 +8,10 @@ export default async function subscribeNewsletter(email) {
   const statusText = res.statusText
   const status = res.status
 
-  if (status !== 200 || status!==201) {
-    if(message) throw new Error(message)
-    throw new Error(statusText)
+  if (status===200) {
+    return data;
   }
-  return data;
+  console.log({status})
+  if(message) throw new Error(message)
+  throw new Error(statusText)
 }

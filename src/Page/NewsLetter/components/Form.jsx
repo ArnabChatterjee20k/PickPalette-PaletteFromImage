@@ -10,8 +10,8 @@ export default function Form() {
   const handleForm = (e)=>{
     e.preventDefault();
     const email = ref.current.value
-    toast.loading("Subscribing....")
-    subscribe(email)
+    const toastId = toast.loading("Subscribing....")
+    subscribe(email,toastId)
   }
   return (
     <form className="mt-6 flex max-w-md gap-x-4" onSubmit={handleForm}>
