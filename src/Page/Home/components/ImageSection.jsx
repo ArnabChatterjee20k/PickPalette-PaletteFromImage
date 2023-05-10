@@ -15,7 +15,11 @@ export default function ImageSection() {
       {!isMobile && <IllustrativeCurlyArrow/>}
       {!isMobile && <IllustrativeButton />}
       {/* relative tag in the image to do the overlay */}
-      <img src={TV} alt="mockup" className="z-20 relative" />
+      <div className="relative">
+        <img src={TV} alt="mockup" className="z-20 relative" />
+        {!isMobile && <iframe className="z-40 aspect-video absolute top-[52px] left-[42px] w-[445px] h-[265px] rounded-lg" src="https://www.youtube.com/embed/Vcd50FB1GVw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>}
+        {isMobile && <iframe className="z-40 aspect-video absolute top-[24px] left-[20px] w-[240px] h-[145px] rounded-lg" src="https://www.youtube.com/embed/Vcd50FB1GVw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>}
+      </div>
       {isMobile ? <MobileBoxes /> : null}
     </div>
   );
