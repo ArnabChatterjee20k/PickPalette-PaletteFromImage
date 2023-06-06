@@ -16,6 +16,7 @@ import { ErrorBoundary } from "react-error-boundary";
 import NewsLetter from "./Page/NewsLetter/NewsLetter";
 
 import { Toaster } from 'react-hot-toast';
+import Feedback from "./Page/Feedback/Feedback";
 
 export default function App() {
   return (
@@ -29,6 +30,7 @@ export default function App() {
               <Route path="/" element={<Home />} />
               <Route path="/generate" element={<ImageUpload />} />
               <Route path="/palettes" element={<Explore />} />
+              <Route path="/feedback" element={<Feedback />} />
               <Route path="/subscribe">
                 <Route path="newsletter" element={<NewsLetter />} />
               </Route>
