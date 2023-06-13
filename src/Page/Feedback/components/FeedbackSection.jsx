@@ -1,41 +1,30 @@
 import React from "react";
 import CommentCard from "./CommentCard";
 import Masonry from "react-masonry-css";
+import useFeedbacks from "../../../services/useFeedbacks";
+import ScrollLoader from "../../../loaders/ScrollLoader";
+
+const breakpointColumnsObj = {
+  default: 5,
+  1100: 3,
+  700: 2,
+  500: 1
+};
 
 export default function FeedbackSection() {
-  const comments = [
-    {
-      id: 1,
-      text: "Great post!ljsdfljdlsfjlsdjfldsjlfjsdlfjlsdjflsdjazjfl;sajf;djfldj;fjdslfj",
-      author: "John Doe",
-    },
-    { id: 2, text: "I completely agree.", author: "Jane Smith" },
-    { id: 2, text: "I completely agree.", author: "Jane Smith" },
-    { id: 2, text: "I completely agree.", author: "Jane Smith" },
-    { id: 2, text: "I completely agree.", author: "Jane Smith" },
-    { id: 2, text: "I completely agree.", author: "Jane Smith" },
-    { id: 2, text: "I completely agree.", author: "Jane Smith" },
-    { id: 2, text: "I completely agree.", author: "Jane Smith" },
-    { id: 2, text: "I completely agree.", author: "Jane Smith" },
-    // Add more comments here...
-  ];
-
-  const breakpointColumnsObj = {
-    default: 5,
-    1100: 3,
-    700: 2,
-    500: 1
-  };
-  
-  return (
+  const {data:comments,isLoading,isFetched,isError} = useFeedbacks()
+  if(isLoading) return <ScrollLoader/>
+  else if(isFetched && !isError){
+    // console.log(comments);
+    return (
     <Masonry
       breakpointCols={breakpointColumnsObj}
-      className="my-masonry-grid"
+      className="my-masonry-grid px-5"
       columnClassName="my-masonry-grid_column"
     >
-      {comments.map((comment) => (
-        <CommentCard key={comment.id} comment={comment} />
+      {comments?.map(({id,feedback}) => (
+        <CommentCard key={id} comment={feedback}/>
       ))}
     </Masonry>
-  );
+  );}
 }

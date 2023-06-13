@@ -4,4 +4,4 @@ export const ABOUT_LINK = "https://github.com/ArnabChatterjee20k/PickPalette-Pal
 export const PALETTE_API = import.meta.env.VITE_PALETTE_API
 export const API_MAX_PAGE = import.meta.env.VITE_API_MAX_PAGE
 
-export const VITE_NEWSLETTER_API = import.meta.env.VITE_NEWSLETTER_API
+export const VITE_MAIN_API = import.meta.env.VITE_MAIN_API
