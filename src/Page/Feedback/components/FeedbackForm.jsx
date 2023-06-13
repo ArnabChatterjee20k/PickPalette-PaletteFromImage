@@ -14,7 +14,7 @@ export default function FeedbackForm() {
       </div>
       <button
         type="submit"
-        className="flex items-center justify-center w-full text-center py-2.5 px-4 text-xs font-medium text-black bg-[#F7C04A] hover:bg-[#ffae00] focus:ring-4 focus:ring-yellow-500 rounded" 
+        className="flex items-center justify-center w-full text-center py-2.5 px-4 text-xs font-medium text-black bg-[#F7C04A] hover:bg-[#ffae00] focus:ring-4 focus:ring-yellow-500 rounded"
       >
         Post comment
       </button>
