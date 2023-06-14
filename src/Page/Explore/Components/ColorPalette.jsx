@@ -49,7 +49,7 @@ const PaletteItem = ({ className, color }) => {
       color={color}
       className={`h-28 flex justify-center items-center flex-grow basis-[1px] hover:basis-[10rem] cursor-pointer ${className}`}
       style={{ transition: "all 0.1s ease", backgroundColor: color }}
-      onClick={clickHandler}
+      onClick={()=>clickHandler(color)}
 
     >
       <span>{defaultText}</span>
