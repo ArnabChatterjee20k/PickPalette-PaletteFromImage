@@ -6,12 +6,6 @@ export default function HeroText() {
       <h2 className="text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
         Join the Conversation
       </h2>
-      <p className="text-2xl font-bold leading-none tracking-tight text-gray-300">
-        Share Your{" "}
-        <span className="underline underline-offset-4 decoration-4 decoration-blue-400 dark:decoration-blue-600">
-          Feedback!
-        </span>
-      </p>
     </div>
   );
 }
