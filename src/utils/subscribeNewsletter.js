@@ -1,7 +1,7 @@
-import { VITE_NEWSLETTER_API } from "../data/data";
+import { VITE_MAIN_API } from "../data/data";
 
 export default async function subscribeNewsletter(email) {
-  const uri = new URL(VITE_NEWSLETTER_API + "/newsletter/user/" + email);
+  const uri = new URL(VITE_MAIN_API + "/newsletter/user/" + email);
   const res = await fetch(uri.href);
   const data = await res.json();
   const {message} = data;
