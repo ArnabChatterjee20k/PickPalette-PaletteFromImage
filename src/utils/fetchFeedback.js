@@ -1,8 +1,7 @@
 import { VITE_MAIN_API } from "../data/data";
+import supabaseClient from "../supabaseClient";
 
 export default async()=>{
-    const url = `${VITE_MAIN_API}/feedback`
-    const res = await fetch(url)
-    const {feedbacks} = await res.json()
-    return feedbacks
+    const {data,statusText} = await supabaseClient.from("feedback").select("*")
+    return data
 }

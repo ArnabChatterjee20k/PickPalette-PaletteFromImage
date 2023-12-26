@@ -2,10 +2,14 @@ import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useEffect, useState } from "react";
 import RedirectButton from "../../../components/RedirectButton";
 import { useSearchParams } from "react-router-dom";
+import SupabaseAuth from "../../../components/SupabaseAuthUI";
+import supabaseClient from "../../../supabaseClient";
 
 export default function FeedbackForm() {
   const [query, setQuery] = useSearchParams();
-  let [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [session, setSession] = useState(null);
+
   const q = query.get("q");
 
   function closeModal() {
@@ -16,9 +20,24 @@ export default function FeedbackForm() {
   function openModal() {
     setIsOpen(true);
   }
+
   useEffect(() => {
     q === "feedback" && openModal();
   }, [q]);
+
+  useEffect(() => {
+    supabaseClient.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+    });
+
+    const {
+      data: { subscription },
+    } = supabaseClient.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
 
   return (
     <>
@@ -54,30 +73,7 @@ export default function FeedbackForm() {
                 leaveTo="opacity-0 scale-95"
               >
                 <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
-                  <Dialog.Title
-                    as="h3"
-                    className="text-lg font-medium leading-6 text-gray-900 mb-2"
-                  >
-                    Feedback
-                  </Dialog.Title>
-                  <textarea
-                    id="message"
-                    rows="8"
-                    class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 "
-                    placeholder="Write your feedback here..."
-                  ></textarea>
-                  <div className="mt-4 flex justify-between items-start">
-                    <span className="text-gray-400 text-base ml-3">
-                      240/240
-                    </span>
-                    <button
-                      type="button"
-                      className="  text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-                      onClick={closeModal}
-                    >
-                      Share
-                    </button>
-                  </div>
+                  {session ? <Form /> : <Auth />}
                 </Dialog.Panel>
               </Transition.Child>
             </div>
@@ -86,4 +82,41 @@ export default function FeedbackForm() {
       </Transition>
     </>
   );
+}
+
+function Form() {
+  const [characters, setCharacters] = useState("");
+  const characterCount = [...characters].filter((c) => c !== "\n").length
+  return (
+    <>
+      <Dialog.Title
+        as="h3"
+        className="text-lg font-medium leading-6 text-gray-900 mb-2"
+      >
+        Feedback
+      </Dialog.Title>
+      <textarea
+        id="message"
+        onChange={(e) => setCharacters(e.target.value)}
+        rows="8"
+        class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 "
+        placeholder="Write your feedback here..."
+      ></textarea>
+      <div className="mt-4 flex justify-between items-start">
+        <span className="text-gray-400 text-base ml-3">
+          <span className={`${characterCount>240 && "text-red-600"}`}>{characterCount}</span>/240
+        </span>
+        <button
+          type="button"
+          className="  text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+        >
+          Share
+        </button>
+      </div>
+    </>
+  );
+}
+
+function Auth() {
+  return <SupabaseAuth />;
 }
