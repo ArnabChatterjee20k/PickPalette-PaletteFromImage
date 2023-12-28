@@ -43,6 +43,8 @@ export default function FeedbackForm() {
     return () => subscription.unsubscribe();
   }, []);
 
+  const isFeedbackAlreadyGiven = localStorage.getItem("feedback-given")
+  if(isFeedbackAlreadyGiven) return <p>Thanks for sharing the feedback</p>
   return (
     <>
       <RedirectButton
@@ -112,6 +114,7 @@ function Form() {
     onSuccess: (status) => {
       toast.success(status);
       setQuery("");
+      localStorage.setItem("feedback-given",true)
     },
     onError: (e) => {
       toast.error("Some problems occured while sending toast");
