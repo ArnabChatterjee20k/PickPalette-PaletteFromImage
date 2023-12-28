@@ -4,6 +4,9 @@ import RedirectButton from "../../../components/RedirectButton";
 import { useSearchParams } from "react-router-dom";
 import SupabaseAuth from "../../../components/SupabaseAuthUI";
 import supabaseClient from "../../../supabaseClient";
+import { useMutation } from "@tanstack/react-query";
+import toast from "react-hot-toast";
+import useUserSessionId from "../../../hooks/useUser";
 
 export default function FeedbackForm() {
   const [query, setQuery] = useSearchParams();
@@ -22,7 +25,8 @@ export default function FeedbackForm() {
   }
 
   useEffect(() => {
-    q === "feedback" && openModal();
+    if (q === "feedback") openModal();
+    else closeModal();
   }, [q]);
 
   useEffect(() => {
@@ -86,7 +90,34 @@ export default function FeedbackForm() {
 
 function Form() {
   const [characters, setCharacters] = useState("");
-  const characterCount = [...characters].filter((c) => c !== "\n").length
+  const characterCount = [...characters].filter((c) => c !== "\n").length;
+  const sessionID = useUserSessionId(); // its a reference value thats why its not reactive. But it would send the correct data
+  const [query, setQuery] = useSearchParams();
+  async function addFeedback() {
+    const { data: status } = await supabaseClient.functions.invoke(
+      "feedback-with-sentiment",
+      {
+        body: {
+          feedback: characters,
+          userId: sessionID,
+        },
+      }
+    );
+    if (status.toLowerCase() !== "created")
+      throw new Error("feedback not created");
+    return status;
+  }
+  const { mutate, isPending, isPaused } = useMutation({
+    mutationFn: addFeedback,
+    onSuccess: (status) => {
+      toast.success(status);
+      setQuery("");
+    },
+    onError: (e) => {
+      toast.error("Some problems occured while sending toast");
+      console.log(e);
+    },
+  });
   return (
     <>
       <Dialog.Title
@@ -104,13 +135,17 @@ function Form() {
       ></textarea>
       <div className="mt-4 flex justify-between items-start">
         <span className="text-gray-400 text-base ml-3">
-          <span className={`${characterCount>240 && "text-red-600"}`}>{characterCount}</span>/240
+          <span className={`${characterCount > 240 && "text-red-600"}`}>
+            {characterCount}
+          </span>
+          /240
         </span>
         <button
+          onClick={mutate}
           type="button"
           className="  text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
         >
-          Share
+          {isPending ? "Sharing...." : "Share"}
         </button>
       </div>
     </>
