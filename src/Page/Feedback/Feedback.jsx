@@ -16,7 +16,7 @@ export default function Feedback() {
 
         <FeedbackForm />
         <div className="max-w-[1300px]">
-          {/* <FeedbackSection /> */}
+          <FeedbackSection />
         </div>
         {/* feedback cards like this https://supabase.com/docs/guides/functions card and you can get them from flowbite */}
       </div>
