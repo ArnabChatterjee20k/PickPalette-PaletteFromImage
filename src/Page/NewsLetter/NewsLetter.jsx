@@ -3,7 +3,7 @@ import NewsLetterFeatures from "./components/NewsLetterFeatures";
 
 export default function NewsLetter() {
   return (
-    <div className="relative isolate overflow-hidden bg-gray-900 py-16 sm:py-24 md:py-72">
+    <div className="relative isolate overflow-hidden bg-gray-900 min-h-screen flex items-center py-2">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-2">
           <div className="max-w-xl lg:max-w-lg">

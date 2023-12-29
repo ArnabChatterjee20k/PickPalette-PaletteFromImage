@@ -4,7 +4,7 @@ import HandRaisedIcon from "../../../components/HandRaisedIcon";
 
 export default function NewsLetterFeatures() {
   return (
-    <dl className="grid grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-2 lg:pt-2">
+    <dl className="flex flex-col justify-evenly gap-6 pb-5 sm:justify-start sm:gap-14">
       <div className="flex flex-col items-start">
         <div className="rounded-md bg-white/5 p-2 ring-1 ring-white/10">
           <CalendarDaysIcon className="h-6 w-6 text-white" aria-hidden="true" />
