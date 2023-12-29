@@ -44,7 +44,10 @@ export default function FeedbackForm() {
   }, []);
 
   const isFeedbackAlreadyGiven = localStorage.getItem("feedback-given")
-  if(isFeedbackAlreadyGiven) return <p>Thanks for sharing the feedback</p>
+  if(isFeedbackAlreadyGiven) return<p className="bg-gradient-to-br from-yellow-500 to-orange-500 bg-clip-text text-transparent font-bold text-xl text-center">
+  Thanks for sharing <span className="font-extrabold">your</span> feedback
+</p>
+
   return (
     <>
       <RedirectButton
