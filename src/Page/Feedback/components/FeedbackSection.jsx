@@ -5,7 +5,7 @@ import useFeedbacks from "../../../services/useFeedbacks";
 import ScrollLoader from "../../../loaders/ScrollLoader";
 
 const breakpointColumnsObj = {
-  default: 5,
+  default: 4,
   1100: 3,
   700: 2,
   500: 1,
@@ -28,28 +28,19 @@ const comments = [
 ];
 
 export default function FeedbackSection() {
-  return (
-    <Masonry
-      breakpointCols={breakpointColumnsObj}
-      className="my-masonry-grid px-5 my-5 flex-1"
-      columnClassName="my-masonry-grid_column"
-    >
-      {comments?.map(({ id, feedback }) => (
-        <CommentCard key={id} comment={feedback} />
-      ))}
-    </Masonry>
-    // const {data,isLoading,isFetched,isError} = useFeedbacks()
-    // if(isLoading) return <ScrollLoader/>
-    // else if(isFetched && !isError){
-    //   return (
-    //   <Masonry
-    //     breakpointCols={breakpointColumnsObj}
-    //     className="my-masonry-grid px-5 my-5 flex-1"
-    //     columnClassName="my-masonry-grid_column"
-    //   >
-    //     {comments?.map(({id,feedback}) => (
-    //       <CommentCard key={id} comment={feedback}/>
-    //     ))}
-    //   </Masonry>
-  ); // );}
+  const { data, isLoading, isFetched, isError } = useFeedbacks();
+  if (isLoading) return <ScrollLoader />;
+  else if (isFetched && !isError) {
+    return (
+      <Masonry
+        breakpointCols={breakpointColumnsObj}
+        className="my-masonry-grid px-5 my-5 flex-1"
+        columnClassName="my-masonry-grid_column"
+      >
+        {data?.map(({ id, feedback }) => (
+          <CommentCard key={id} comment={feedback} />
+        ))}
+      </Masonry>
+    );
+  }
 }
