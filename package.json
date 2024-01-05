@@ -24,7 +24,8 @@
     "react-loader-spinner": "^5.3.4",
     "react-masonry-css": "^1.0.16",
     "react-router-dom": "^6.10.0",
-    "styled-components": "^5.3.9"
+    "styled-components": "^5.3.9",
+    "tailwind-merge": "^2.2.0"
   },
   "devDependencies": {
     "@types/react": "^18.0.28",

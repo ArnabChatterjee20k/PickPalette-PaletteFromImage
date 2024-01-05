@@ -11,7 +11,7 @@ export default function useUserSessionId() {
       if (error) userSession.current = null;
       else {
         const { session } = data;
-        userSession.current = session.user.id;
+        userSession.current = session?.user?.id;
       }
     });
     return () => subscription.unsubscribe();
