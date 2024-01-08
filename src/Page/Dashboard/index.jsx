@@ -6,7 +6,9 @@ export default function index() {
   return (
     <section className="flex">
       <Sidebar />
-      <Outlet/>
+      <Board>
+        <Outlet />
+      </Board>
     </section>
   );
 }

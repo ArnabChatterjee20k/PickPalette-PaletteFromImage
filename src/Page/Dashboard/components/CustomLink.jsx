@@ -12,7 +12,7 @@ export default function CustomLink({ text, link, Icon }) {
       }`}
     >
       {
-        <Icon className="w-5 h-5 text-white transition duration-75  group-hover:text-gray-900 " />
+        <Icon className={`w-5 h-5 transition duration-75  group-hover:text-gray-900 ${isActive ? "text-gray-900":"text-white "}`} />
       }
       <span className="ms-3">{text}</span>
     </Link>

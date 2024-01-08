@@ -1,7 +1,9 @@
 import React from 'react'
 
-export default function Board() {
+export default function Board({children}) {
   return (
-    <section className='bg-[#09090b] w-full'><h1 className='text-white text-2xl font-bold'>Board</h1></section>
+    <section className='bg-[#09090b] w-full px-5 py-4'>
+      {children}
+    </section>
   )
 }

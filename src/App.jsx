@@ -21,6 +21,9 @@ import Feedback from "./Page/Feedback/Feedback";
 import Dashboard from "./Page/Dashboard/";
 import DashboardNavbar from "./layout/DashboardNavbar";
 
+import Projects from "./Page/Projects";
+import ProjectViewer from "./Page/Projects/components/ProjectViewer";
+
 export default function App() {
   return (
     <ErrorBoundary FallbackComponent={Fallback}>
@@ -43,12 +46,22 @@ export default function App() {
               <Route path="/user" element={<DashboardNavbar />}>
                 <Route path="dashboard" element={<Dashboard />}>
                   <Route path="" element={<Navigate to="projects" />} />
-                  <Route path="projects" element={<h1>{window.location.pathname}</h1>} />
+                  <Route path="projects" element={<Projects />}>
+                    <Route path="" element={<ProjectViewer />} />
+                    <Route path=":id" element />
+                  </Route>
                   <Route
                     path="favourites"
                     element={<h1>{window.location.pathname}</h1>}
                   />
-                  <Route path="docs" element={<h1>{window.location.pathname}</h1>} />
+                  <Route
+                    path="keys"
+                    element={<h1>{window.location.pathname}</h1>}
+                  />
+                  <Route
+                    path="docs"
+                    element={<h1>{window.location.pathname}</h1>}
+                  />
                 </Route>
               </Route>
             </Routes>
