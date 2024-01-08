@@ -11,7 +11,7 @@ export default function Navbar() {
   const isMobile = useIsMobile();
   return (
     <>
-      <NavContainer>
+      <NavContainer className="sticky top-0 left-0 right-0 z-50">
         <div className="flex justify-between items-center content w-full m-auto px-8 pb-3 pt-5 shadow-sm">
           <Logo />
           {isMobile ? <MobileNav /> : <DesktopNav />}

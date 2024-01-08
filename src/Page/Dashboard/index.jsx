@@ -1,8 +1,12 @@
-import React from 'react'
-import { Route } from 'react-router-dom'
-
+import React from "react";
+import Sidebar from "./components/Sidebar";
+import Board from "./components/Board";
+import { Outlet } from "react-router-dom";
 export default function index() {
   return (
-    <h1>index</h1>
-  )
+    <section className="flex">
+      <Sidebar />
+      <Outlet/>
+    </section>
+  );
 }

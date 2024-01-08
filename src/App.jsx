@@ -40,8 +40,16 @@ export default function App() {
                 <Route path="*" element={<h1>Not found</h1>} />
               </Route>
 
-              <Route path="/user" element={<DashboardNavbar/>}>
-                <Route path="dashboard" element={<Dashboard />} />
+              <Route path="/user" element={<DashboardNavbar />}>
+                <Route path="dashboard" element={<Dashboard />}>
+                  <Route path="" element={<Navigate to="projects" />} />
+                  <Route path="projects" element={<h1>{window.location.pathname}</h1>} />
+                  <Route
+                    path="favourites"
+                    element={<h1>{window.location.pathname}</h1>}
+                  />
+                  <Route path="docs" element={<h1>{window.location.pathname}</h1>} />
+                </Route>
               </Route>
             </Routes>
           </Suspense>

@@ -5,7 +5,7 @@ import Logo from "./components/Logo";
 export default function DashboardNavbar() {
   return (
     <>
-      <NavContainer>
+      <NavContainer className="bg-[#09090b]">
         <div className="w-full m-auto px-4 py-5">
           <Logo className="text-xl" />
         </div>
@@ -14,3 +14,4 @@ export default function DashboardNavbar() {
     </>
   );
 }
+  
