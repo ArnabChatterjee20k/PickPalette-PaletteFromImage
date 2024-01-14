@@ -18,8 +18,10 @@ import NewsLetter from "./Page/NewsLetter/NewsLetter";
 import { Toaster } from "react-hot-toast";
 import Feedback from "./Page/Feedback/Feedback";
 
-import Dashboard from "./Page/Dashboard/";
 import DashboardNavbar from "./layout/DashboardNavbar";
+import Dashboard from "./layout/Dashboard";
+import projectViewerLinks from "./data/dashboard-links/projectViewerLinks.dashboard";
+import projectSettingsLinks from "./data/dashboard-links/projectSettingsLinks.dashboard";
 
 import Projects from "./Page/Projects";
 import ProjectViewer from "./Page/Projects/components/ProjectViewer";
@@ -44,13 +46,13 @@ export default function App() {
               </Route>
 
               <Route path="/user" element={<DashboardNavbar />}>
-                <Route path="dashboard" element={<Dashboard />}>
+                <Route
+                  path="dashboard"
+                  element={<Dashboard sidebarLinks={projectViewerLinks} />}
+                >
                   <Route path="" element={<Navigate to="projects" />} />
                   <Route path="projects" element={<Projects />}>
                     <Route path="" element={<ProjectViewer />} />
-                    <Route path=":id" />
-                      
-                    {/* </Route> */}
                   </Route>
                   <Route
                     path="favourites"
@@ -64,6 +66,14 @@ export default function App() {
                     path="docs"
                     element={<h1>{window.location.pathname}</h1>}
                   />
+                </Route>
+                <Route
+                  path="projects/:id"
+                  element={<Dashboard sidebarLinks={projectSettingsLinks} />}
+                >
+                  <Route path="palette" element={<h1>palette</h1>} />
+                  <Route path="settings" element={<h1>settings</h1>} />
+                  <Route path="usage" element={<h1>usage</h1>} />
                 </Route>
               </Route>
             </Routes>

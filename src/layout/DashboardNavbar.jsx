@@ -2,8 +2,6 @@ import React from "react";
 import { Outlet } from "react-router-dom";
 import NavContainer from "./components/NavContainer";
 import Logo from "./components/Logo";
-import Board from "../Page/Dashboard/components/Board";
-
 export default function DashboardNavbar() {
   return (
     <>
