@@ -48,7 +48,9 @@ export default function App() {
                   <Route path="" element={<Navigate to="projects" />} />
                   <Route path="projects" element={<Projects />}>
                     <Route path="" element={<ProjectViewer />} />
-                    <Route path=":id" element />
+                    <Route path=":id" />
+                      
+                    {/* </Route> */}
                   </Route>
                   <Route
                     path="favourites"

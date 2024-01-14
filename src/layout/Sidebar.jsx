@@ -1,8 +1,7 @@
 import React from "react";
-import sidebarLinks from "../data/sidebarLinks";
-import CustomLink from "./CustomLink";
+import CustomLink from "./components/CustomLink";
 
-export default function Sidebar() {
+export default function Sidebar({sidebarLinks}) {
   return (
     <aside
       id="default-sidebar"
