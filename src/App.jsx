@@ -26,6 +26,7 @@ import projectSettingsLinks from "./data/dashboard-links/projectSettingsLinks.da
 import Projects from "./Page/Projects";
 import ProjectViewer from "./Page/Projects/components/ProjectViewer";
 
+import ProjectPalette from "./Page/ProjectPalette"
 export default function App() {
   return (
     <ErrorBoundary FallbackComponent={Fallback}>
@@ -71,7 +72,7 @@ export default function App() {
                   path="projects/:id"
                   element={<Dashboard sidebarLinks={projectSettingsLinks} />}
                 >
-                  <Route path="palette" element={<h1>palette</h1>} />
+                  <Route path="palette" element={<ProjectPalette/>} />
                   <Route path="settings" element={<h1>settings</h1>} />
                   <Route path="usage" element={<h1>usage</h1>} />
                 </Route>

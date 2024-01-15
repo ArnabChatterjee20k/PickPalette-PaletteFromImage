@@ -2,14 +2,15 @@ import React from "react";
 import getCurrentYear from "../utils/getCurrentYear";
 import { APP_NAME, FOOTER_LINK } from "../data/data";
 import socialLinks from "../data/socialLinks";
-import { useLocation } from "react-router-dom";
+import { useLocation, useMatch } from "react-router-dom";
 import useIsMobile from "../hooks/useIsMobile";
 
 export default function Footer() {
   const location = useLocation();
   const isMobile = useIsMobile();
+  const isMatch = useMatch("/user/*");
+  if (isMatch) return null;
   if (location.pathname === "/" && !isMobile) return null;
-  if(location.pathname === "/user/dashboard") return null
   const year = getCurrentYear();
   return (
     <footer class="sticky w-full p-4  border-t  shadow md:flex md:items-center md:justify-between md:p-6 bg-gray-800 border-gray-600">
