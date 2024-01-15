@@ -5,11 +5,16 @@ import PaletteSkeleton from "./PaletteSkeleton";
 
 export default function PaletteViewer() {
   const { data, isLoading, isError } = useProjectPalette();
-  const gapInREM = isLoading?0.5:0.5
+  const gapInREM = isLoading ? 0.5 : 0.5;
   return (
-    <div className="flex flex-col sm:flex-row" style={{gap:`${gapInREM}rem`}}>
+    <div
+      className="flex flex-col sm:flex-row"
+      style={{ gap: `${gapInREM}rem` }}
+    >
       {isLoading && <PalettePlaceholder />}
-        {data?.map((color)=><Palette color={color}/>)}
+      {data?.map((color) => (
+        <Palette color={color} />
+      ))}
     </div>
   );
 }
