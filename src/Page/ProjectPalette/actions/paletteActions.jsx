@@ -1,5 +1,4 @@
-import { useEffect, useRef } from "react";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient, useMutationState } from "@tanstack/react-query";
 import changeProjectPalette from "../utils/changeProjectPalette";
 import { useParams } from "react-router-dom";
 import {
@@ -14,7 +13,10 @@ export default function paletteActions() {
   const client = useQueryClient();
   const { id } = useParams();
   const queryKey = ["project-palette", id];
-  const mutate = useMutation({
+  const mutationKey = ["project-palette-update", id];
+  const savingState = useMutationState({filters:{mutationKey:mutationKey,status:"pending"}})
+  const { mutate } = useMutation({
+    mutationKey: mutationKey,
     mutationFn: (data) => changeProjectPalette(data),
   });
 
@@ -41,16 +43,18 @@ export default function paletteActions() {
     let timeoutId;
     timeoutId = setTimeout(() => {
       const newData = getLatestColorChanged();
-      mutate.mutate(newData, {
+      mutate(newData, {
         onSuccess: () => {
           console.log({
             newData,
           });
         },
+        onSettled: () => {
+          noMoreScheduling();
+        },
       });
       clearTimeout(timeoutId);
-      noMoreScheduling();
     }, 4000);
   }
-  return { changePalette, savePalette };
+  return { changePalette, savePalette ,savingState};
 }
