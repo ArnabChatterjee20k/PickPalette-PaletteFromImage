@@ -38,8 +38,20 @@ export default function paletteActions() {
 
   function manualSave() {
     const oldDataForScheduledActions = client.getQueryData(queryKey);
-    addToStack(oldDataForScheduledActions);
-    perfromAction(1000);
+    // addToStack(oldDataForScheduledActions);
+    // perfromAction(1000);
+    noMoreScheduling();
+    console.log("manual saving.....");
+    mutate(oldDataForScheduledActions, {
+      onSuccess: () => {
+        console.log({
+          dataSent: oldDataForScheduledActions,
+        });
+      },
+      onSettled: () => {
+        console.log("manual saving over");
+      },
+    });
   }
 
   function savePalette() {
@@ -48,7 +60,7 @@ export default function paletteActions() {
     addToStack(oldDataForScheduledActions);
     perfromAction(4000);
     if (isPending) {
-      console.log("Adding to waitlist",oldDataForScheduledActions);
+      console.log("Adding to waitlist", oldDataForScheduledActions);
       addToWaitList(oldDataForScheduledActions);
     }
   }
@@ -61,7 +73,11 @@ export default function paletteActions() {
     let timeoutId;
     timeoutId = setTimeout(() => {
       const newData = getLatestColorChanged();
-      console.log("mutating.....")
+      if(!newData.length) {
+        clearTimeout(timeoutId)
+        return
+      }
+      console.log("mutating.....");
       mutate(newData, {
         onSuccess: () => {
           console.log({
@@ -70,10 +86,10 @@ export default function paletteActions() {
         },
         onSettled: () => {
           noMoreScheduling();
-          debugger
+          debugger;
           const waitListData = getWaitList();
           if (waitListData.length) {
-            console.log("waitlist......",{waitListData});
+            console.log("waitlist......", { waitListData });
             perfromAction(200);
           }
         },

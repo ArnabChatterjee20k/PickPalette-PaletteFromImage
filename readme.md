@@ -32,3 +32,15 @@
 </details>
 
 </details>
+
+<details>
+    <summary>Building the manual save in an addition to the autosave and ecountering issues such autosave during manual save or manual save during autosave</summary>
+    <p>
+       <li>We are using scheduling system.</li>
+       <li>When manual save is pressed, just clear the schedule and push the latest data</li>
+       <li>If during autosave manual save is pressed, then the queue will get emptied since the latest data pushed so if no data remains in the queue , dont go for the mutation</li>
+       <li>If during manual save some changes performed, stack them up. And make another request with another set of data which will be autosaving</li>
+    </p>
+</details>
+
+</details>
