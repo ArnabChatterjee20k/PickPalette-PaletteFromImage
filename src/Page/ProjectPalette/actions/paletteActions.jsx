@@ -1,4 +1,8 @@
-import { useMutation, useQueryClient, useMutationState } from "@tanstack/react-query";
+import {
+  useMutation,
+  useQueryClient,
+  useMutationState,
+} from "@tanstack/react-query";
 import changeProjectPalette from "../utils/changeProjectPalette";
 import { useParams } from "react-router-dom";
 import {
@@ -7,6 +11,8 @@ import {
   isScheduled,
   startScheduling,
   noMoreScheduling,
+  addToWaitList,
+  getWaitList,
 } from "../store/paletteStore";
 
 export default function paletteActions() {
@@ -14,8 +20,10 @@ export default function paletteActions() {
   const { id } = useParams();
   const queryKey = ["project-palette", id];
   const mutationKey = ["project-palette-update", id];
-  const savingState = useMutationState({filters:{mutationKey:mutationKey,status:"pending"}})
-  const { mutate } = useMutation({
+  const savingState = useMutationState({
+    filters: { mutationKey: mutationKey, status: "pending" },
+  });
+  const { mutate, isPending } = useMutation({
     mutationKey: mutationKey,
     mutationFn: (data) => changeProjectPalette(data),
   });
@@ -28,14 +36,24 @@ export default function paletteActions() {
     });
   }
 
-  function savePalette() {
-    // Store the current data for comparison in the useEffect
+  function manualSave() {
     const oldDataForScheduledActions = client.getQueryData(queryKey);
     addToStack(oldDataForScheduledActions);
-    perfromAction();
+    perfromAction(1000);
   }
 
-  function perfromAction() {
+  function savePalette() {
+    // if a mutation is happening , the newly made changes will get lost
+    const oldDataForScheduledActions = client.getQueryData(queryKey);
+    addToStack(oldDataForScheduledActions);
+    perfromAction(4000);
+    if (isPending) {
+      console.log("Adding to waitlist",oldDataForScheduledActions);
+      addToWaitList(oldDataForScheduledActions);
+    }
+  }
+
+  function perfromAction(timeout) {
     console.log({ isScheduled: isScheduled() });
     if (isScheduled()) return;
     console.log("saving");
@@ -43,6 +61,7 @@ export default function paletteActions() {
     let timeoutId;
     timeoutId = setTimeout(() => {
       const newData = getLatestColorChanged();
+      console.log("mutating.....")
       mutate(newData, {
         onSuccess: () => {
           console.log({
@@ -51,10 +70,17 @@ export default function paletteActions() {
         },
         onSettled: () => {
           noMoreScheduling();
+          debugger
+          const waitListData = getWaitList();
+          if (waitListData.length) {
+            console.log("waitlist......",{waitListData});
+            perfromAction(200);
+          }
         },
       });
+
       clearTimeout(timeoutId);
-    }, 4000);
+    }, timeout);
   }
-  return { changePalette, savePalette ,savingState};
+  return { changePalette, savePalette, savingState, manualSave };
 }
