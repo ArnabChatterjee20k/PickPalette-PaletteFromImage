@@ -1,3 +1,7 @@
+### ToDo
+- Handle edge cases when user session get expired during fetching , palettes update
+- Handle edge cases of authorisation while fetching
+- Handle error state of ui in projects page
 ### Learnings
 
 <details>

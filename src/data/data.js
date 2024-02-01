@@ -7,3 +7,4 @@ export const API_MAX_PAGE = import.meta.env.VITE_API_MAX_PAGE
 export const VITE_MAIN_API = import.meta.env.VITE_MAIN_API
 export const SUPABASE_PROJECT_ID = import.meta.env.VITE_SUPABASE_PROJECT_ID
 export const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY
+export const SUPABASE_FUNCTIONS = import.meta.env.VITE_SUPABASE_FUNCTIONS_API

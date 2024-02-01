@@ -25,7 +25,7 @@ export default function paletteActions() {
   });
   const { mutate, isPending } = useMutation({
     mutationKey: mutationKey,
-    mutationFn: (data) => changeProjectPalette(data),
+    mutationFn: ({data,projectId}) => changeProjectPalette(data,projectId),
   });
 
   function changePalette(color, idx) {
@@ -42,7 +42,7 @@ export default function paletteActions() {
     // perfromAction(1000);
     noMoreScheduling();
     console.log("manual saving.....");
-    mutate(oldDataForScheduledActions, {
+    mutate({data:oldDataForScheduledActions,projectId:id}, {
       onSuccess: () => {
         console.log({
           dataSent: oldDataForScheduledActions,
@@ -78,7 +78,7 @@ export default function paletteActions() {
         return
       }
       console.log("mutating.....");
-      mutate(newData, {
+      mutate({data:newData,projectId:id}, {
         onSuccess: () => {
           console.log({
             newData,
