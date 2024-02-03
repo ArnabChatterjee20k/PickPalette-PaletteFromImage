@@ -6,7 +6,7 @@ import SupabaseAuth from "../../../components/SupabaseAuthUI";
 import supabaseClient from "../../../supabaseClient";
 import { useMutation } from "@tanstack/react-query";
 import toast from "react-hot-toast";
-import useUserSessionId from "../../../hooks/useUser";
+import useUserSessionId from "../../../hooks/useUserSessionId";
 
 export default function FeedbackForm() {
   const [query, setQuery] = useSearchParams();

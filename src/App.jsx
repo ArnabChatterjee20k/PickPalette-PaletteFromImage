@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from "react";
+import React, { Suspense, lazy, useEffect } from "react";
 import Container from "./components/Container";
 import Navbar from "./layout/Navbar";
 import Footer from "./components/Footer";
@@ -26,7 +26,8 @@ import projectSettingsLinks from "./data/dashboard-links/projectSettingsLinks.da
 import Projects from "./Page/Projects";
 import ProjectViewer from "./Page/Projects/components/ProjectViewer";
 
-import ProjectPalette from "./Page/ProjectPalette"
+import ProjectPalette from "./Page/ProjectPalette";
+import supabaseClient from "./supabaseClient";
 export default function App() {
   return (
     <ErrorBoundary FallbackComponent={Fallback}>
@@ -72,7 +73,7 @@ export default function App() {
                   path="projects/:id"
                   element={<Dashboard sidebarLinks={projectSettingsLinks} />}
                 >
-                  <Route path="palette" element={<ProjectPalette/>} />
+                  <Route path="palette" element={<ProjectPalette />} />
                   <Route path="settings" element={<h1>settings</h1>} />
                   <Route path="usage" element={<h1>usage</h1>} />
                 </Route>
