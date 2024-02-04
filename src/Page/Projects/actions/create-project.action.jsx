@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
 export default function createProjectAction() {
-  const { mutate } = useMutation({
+  const { mutate,isPending } = useMutation({
     mutationFn: (name, description) => createProjects(name, description),
   });
   const nav = useNavigate();
@@ -23,5 +23,5 @@ export default function createProjectAction() {
       }
     );
   }
-  return { createProject };
+  return { createProject,isPending };
 }

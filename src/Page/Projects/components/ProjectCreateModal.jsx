@@ -29,12 +29,13 @@ export default function ProjectCreateModal({ children }) {
 }
 
 function Form() {
-  const { createProject } = createProjectAction();
+  const { createProject, isPending } = createProjectAction();
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
 
   async function handleSubmission(e) {
     e.preventDefault();
+    if (isPending) return;
     const fields = [name, description];
     fields.forEach((field) => {
       if (field.trim().length === 0) {
@@ -81,10 +82,11 @@ function Form() {
       <div className="mt-[25px] flex justify-end">
         {/* <Dialog.Close asChild> */}
         <button
+          disabled={isPending}
           type="submit"
-          className="bg-yellow-500 text-green11 hover:bg-green5 focus:shadow-green7 inline-flex h-[35px] items-center justify-center rounded-[4px] px-[15px] font-medium leading-none focus:shadow-[0_0_0_2px] focus:outline-none"
+          className="inline-flex items-center justify-center px-3 py-2 text-[0.8rem] font-medium text-center rounded-md w-30 text-black bg-[#ffae00] hover:bg-[#F7C04A] disabled:bg-[#F7C04A]  focus:ring-4 focus:ring-yellow-500"
         >
-          Create
+          {isPending ? "Creating..." : "Create"}
         </button>
         {/* </Dialog.Close> */}
       </div>

@@ -7,7 +7,7 @@ export default function DashboardNavbar() {
     <>
       <NavContainer className="bg-[#09090b]">
         <div className="w-full m-auto px-4 py-5">
-          <Logo className="text-xl" />
+          <Logo className="text-xl" link="/user/dashboard/projects"/>
         </div>
       </NavContainer>
       <Outlet />

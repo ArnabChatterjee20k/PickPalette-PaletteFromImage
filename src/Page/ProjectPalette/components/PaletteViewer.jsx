@@ -12,7 +12,7 @@ export default function PaletteViewer() {
       style={{ gap: `${gapInREM}rem` }}
     >
       {isLoading && <PalettePlaceholder />}
-      {data?.map((color,idx) => (
+      {data?.colors?.map((color,idx) => (
         <Palette color={color} idx={idx}/>
       ))}
     </div>

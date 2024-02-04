@@ -14,5 +14,5 @@ export default async function projectPaletteFetcher(id) {
 
   const res = await fetch(url, options);
   const data = await res.json();
-  return data.data[0].colors;
+  return data.data[0];
 }
