@@ -25,13 +25,16 @@ export default function paletteActions() {
   });
   const { mutate, isPending } = useMutation({
     mutationKey: mutationKey,
-    mutationFn: ({data,projectId}) => changeProjectPalette(data,projectId),
+    mutationFn: ({ data, projectId }) => changeProjectPalette(data, projectId),
   });
 
   function changePalette(color, idx) {
     client.setQueryData(queryKey, (old) => {
-      const newData = [...old];
-      newData[idx] = color;
+      const newData = { ...old };
+
+      newData.colors = [...old.colors];
+      newData.colors[idx] = color;
+
       return newData;
     });
   }
@@ -42,16 +45,19 @@ export default function paletteActions() {
     // perfromAction(1000);
     noMoreScheduling();
     console.log("manual saving.....");
-    mutate({data:oldDataForScheduledActions,projectId:id}, {
-      onSuccess: () => {
-        console.log({
-          dataSent: oldDataForScheduledActions,
-        });
-      },
-      onSettled: () => {
-        console.log("manual saving over");
-      },
-    });
+    mutate(
+      { data: oldDataForScheduledActions?.colors, projectId: id },
+      {
+        onSuccess: () => {
+          console.log({
+            dataSent: oldDataForScheduledActions?.colors,
+          });
+        },
+        onSettled: () => {
+          console.log("manual saving over");
+        },
+      }
+    );
   }
 
   function savePalette() {
@@ -66,6 +72,7 @@ export default function paletteActions() {
   }
 
   function perfromAction(timeout) {
+    // debugger
     console.log({ isScheduled: isScheduled() });
     if (isScheduled()) return;
     console.log("saving");
@@ -73,27 +80,30 @@ export default function paletteActions() {
     let timeoutId;
     timeoutId = setTimeout(() => {
       const newData = getLatestColorChanged();
-      if(!newData.length) {
-        clearTimeout(timeoutId)
-        return
+      if (!newData?.colors.length) {
+        clearTimeout(timeoutId);
+        return;
       }
       console.log("mutating.....");
-      mutate({data:newData,projectId:id}, {
-        onSuccess: () => {
-          console.log({
-            newData,
-          });
-        },
-        onSettled: () => {
-          noMoreScheduling();
-          debugger;
-          const waitListData = getWaitList();
-          if (waitListData.length) {
-            console.log("waitlist......", { waitListData });
-            perfromAction(200);
-          }
-        },
-      });
+      mutate(
+        { data: newData?.colors, projectId: id },
+        {
+          onSuccess: () => {
+            console.log({
+              newData,
+            });
+          },
+          onSettled: () => {
+            noMoreScheduling();
+            // debugger;
+            const waitListData = getWaitList();
+            if (waitListData.length) {
+              console.log("waitlist......", { waitListData });
+              perfromAction(200);
+            }
+          },
+        }
+      );
 
       clearTimeout(timeoutId);
     }, timeout);
