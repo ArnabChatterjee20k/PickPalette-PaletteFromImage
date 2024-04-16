@@ -7,7 +7,8 @@ import ProjectCreateModal from "./ProjectCreateModal";
 
 export default function ProjectViewer() {
   const [query, setQuery] = useSearchParams();
-  const { data, isLoading, isError } = useProjects();
+  const { data, isLoading, isError,error } = useProjects();
+  if(isError)console.log(error)
   if (isLoading) return <h2>Loading....</h2>;
   if (isError) return <h2>Some error while fetching projects...</h2>;
   
