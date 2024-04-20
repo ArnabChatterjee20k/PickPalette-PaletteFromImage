@@ -3,34 +3,13 @@ import useIsMobile from "../../../hooks/useIsMobile";
 import getContrastingColor from "../../../utils/getContrastingColor";
 import { usePaletteConext } from "../cotext/paletteContext";
 import useColorClipboard from "../../../hooks/useColorClipboard";
+import PerfectScrollbar from "@opuscapita/react-perfect-scrollbar";
 
-export default function ColorPalette({ colors }) {
-  const lastIndex = colors.length - 1;
-  const { lastPaletteReference, isVisible } = usePaletteConext();
-  // console.log({lastPaletteReference,isVisible})
-
-  return (
-    <div
-      ref={lastPaletteReference}
-      className="flex flex-col w-full overflow-hidden bg-white dark:bg-neutral-800/50 rounded-xl p-4 border-2 transition-all duration-150 ease-in-out border-slate-200 dark:border-neutral-800 shadow-sm"
-    >
-      <ul class="flex w-full mb-4">
-        {colors.map((color, index) => {
-          return color ? (
-            <PaletteItem
-              key={`${color + index}`}
-              className={`${index === 0 ? "rounded-l" : ""} ${
-                index === lastIndex ? "rounded-r" : ""
-              }`}
-              color={color}
-              totalPalettes={colors.length}
-            />
-          ) : null;
-        })}
-      </ul>
-    </div>
-  );
-}
+import {
+  LikeButton,
+  LivePreviewButton,
+  UsePaletteInProject,
+} from "../Components/Buttons";
 
 const Item = styled.li`
   span {
@@ -43,7 +22,7 @@ const Item = styled.li`
   width: ${({ totalPalettes }) => 100 / totalPalettes}%;
 
   &:hover {
-    width: ${({ totalPalettes }) => 100 / totalPalettes + 20}%;
+    width: ${({ totalPalettes }) => 100 / totalPalettes + 10}%;
     transition: all 0.1s ease;
   }
 
@@ -51,6 +30,39 @@ const Item = styled.li`
     opacity: 1;
   }
 `;
+
+export default function ColorPalette({ colors }) {
+  const lastIndex = colors.length - 1;
+  const { lastPaletteReference, isVisible } = usePaletteConext();
+  // console.log({lastPaletteReference,isVisible})
+
+  return (
+    <div
+      ref={lastPaletteReference}
+      className="flex flex-col w-full overflow-hidden bg-white dark:bg-neutral-800/50 rounded-xl p-4 border-2 transition-all duration-150 ease-in-out border-slate-200 dark:border-neutral-800 shadow-sm"
+    >
+      <ul className="flex gap-2 w-full mb-4 overflow-x-scroll sm:overflow-auto">
+        {colors.map((color, index) => {
+          return color ? (
+            <PaletteItem
+              key={`${color + index}`}
+              className="rounded-lg"
+              color={color}
+              totalPalettes={colors.length}
+            />
+          ) : null;
+        })}
+      </ul>
+      <div className="flex justify-between">
+        <div className="flex gap-3">
+          <UsePaletteInProject />
+          <LivePreviewButton />
+        </div>
+        <LikeButton />
+      </div>
+    </div>
+  );
+}
 
 const PaletteItem = ({ className, color, totalPalettes }) => {
   const isMobile = useIsMobile();
