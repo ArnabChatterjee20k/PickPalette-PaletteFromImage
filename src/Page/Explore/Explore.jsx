@@ -2,7 +2,7 @@ import React from "react";
 import ColorPalette from "./Components/ColorPalette";
 import useColorPalettes from "../../services/useColorPalettes";
 import ScrollLoader from "../../loaders/ScrollLoader";
-import { useRef ,useCallback} from "react";
+import { useRef, useCallback } from "react";
 import PaletteContextProvider from "./cotext/paletteContext";
 
 export default function Explore() {
@@ -12,42 +12,48 @@ export default function Explore() {
     hasNextPage,
     isFetched,
     isLoading,
-    isFetchingNextPage
+    isFetchingNextPage,
   } = useColorPalettes();
 
-  const intObserver = useRef()
-  const lastPaletteRef = useCallback(post => {
-      if (isFetchingNextPage) return
+  const intObserver = useRef();
+  const lastPaletteRef = useCallback(
+    (post) => {
+      if (isFetchingNextPage) return;
 
-      if (intObserver.current) intObserver.current.disconnect()
+      if (intObserver.current) intObserver.current.disconnect();
 
-      intObserver.current = new IntersectionObserver(palettes => {
-          const [palette] = palettes
-          if (palette.isIntersecting && hasNextPage) {
-              fetchNextPage()
-          }
-      })
+      intObserver.current = new IntersectionObserver((palettes) => {
+        const [palette] = palettes;
+        if (palette.isIntersecting && hasNextPage) {
+          fetchNextPage();
+        }
+      });
 
-      if (post) intObserver.current.observe(post)
-  }, [isFetchingNextPage, fetchNextPage, hasNextPage])
-  
+      if (post) intObserver.current.observe(post);
+    },
+    [isFetchingNextPage, fetchNextPage, hasNextPage]
+  );
+
   return (
-    <PaletteContextProvider lastPaletteReference={lastPaletteRef} >
+    <PaletteContextProvider lastPaletteReference={lastPaletteRef}>
       <section className="flex min-h-screen flex-col items-center">
-        {isLoading && <Loader/>}
-        <div className="w-full mb-auto px-4 py-5 grid grid-cols-1 justify-items-center sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-6 gap-x-12">
+        {isLoading && <Loader />}
+        <div className="w-fit mb-auto px-4 py-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 justify-items-center gap-y-6 gap-x-10">
           {isFetched &&
-            paletteData.pages.map(({ palettes }) => {
+            paletteData?.pages.map(({ palettes }) => {
               return palettes.map((colors, index) => {
-                return (
-                    <ColorPalette colors={colors} key={index}/>
-                );
+                const uniqueColors = [...new Set(colors)];
+                if (uniqueColors.length >= 2)
+                  return (
+                    <ColorPalette
+                      colors={uniqueColors.slice(0, 7)}
+                      key={index}
+                    />
+                  );
               });
             })}
         </div>
-        {hasNextPage && (
-          <Loader/>
-        )}
+        {hasNextPage && <Loader />}
       </section>
     </PaletteContextProvider>
   );
