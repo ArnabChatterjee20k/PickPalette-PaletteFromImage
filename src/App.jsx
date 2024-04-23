@@ -30,6 +30,8 @@ import ProjectPalette from "./Page/ProjectPalette";
 import supabaseClient from "./supabaseClient";
 import { AuthContextProvider } from "./context/AuthContext";
 import { MemberModalContextProvider } from "./context/MemberModalContext";
+import Signin from "./Page/Signin/Signin";
+import Signup from "./Page/Signup/Signup";
 
 export default function App() {
   return (
@@ -53,6 +55,8 @@ export default function App() {
                   </Route>
 
                   <Route path="/user" element={<DashboardNavbar />}>
+                    <Route path="signin" element={<Signin />} />
+                    <Route path="signup" element={<Signup />} />
                     <Route
                       path="dashboard"
                       element={<Dashboard sidebarLinks={projectViewerLinks} />}
