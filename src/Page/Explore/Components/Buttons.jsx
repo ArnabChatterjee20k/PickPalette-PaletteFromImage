@@ -7,19 +7,20 @@ import {
 import { useNavigate } from "react-router-dom";
 import { mutateSavePalette } from "../actions/mutateSavePalette";
 import useSavePalettes from "../../../services/useSavePalettes";
+import { motion } from "framer-motion";
 
 export function LikeButton({ palettes, userID }) {
   const { likeAction, unlikeAction, isLikePending } =
     mutateSavePalette(palettes);
   const { savedPalettes } = useSavePalettes();
   const isLiked = savedPalettes?.includes(palettes.join("-"));
-  const {isLoading} = useSavePalettes()
+  const { isLoading } = useSavePalettes();
   return (
     <Button
       onClick={isLiked ? unlikeAction : likeAction}
       className="flex items-center h-full gap-x-1 text-sm font-semibold bg-neutral-800 hover:bg-neutral-700 px-5 py-2.5 rounded-lg"
     >
-      {isLoading?"Loading":<Heart like={isLiked} />}
+      {isLoading ? null : <Heart like={isLiked} />}
     </Button>
   );
 }
@@ -50,6 +51,13 @@ function Button({ children, onClick }) {
 }
 
 function Heart({ like }) {
-  if (like) return <HeartIconSolid color="red" className="w-4" />;
-  return <HeartIconOutline color="white" className="w-4" />;
+  return (
+    <motion.span whileTap={{ scale: 0.8 }}>
+      {like ? (
+        <HeartIconSolid color="red" className="w-4" />
+      ) : (
+        <HeartIconOutline color="white" className="w-4" />
+      )}
+    </motion.span>
+  );
 }
