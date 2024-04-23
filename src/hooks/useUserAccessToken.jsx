@@ -1,6 +1,6 @@
 import { useAuthContext } from "../context/AuthContext";
 
-export default function useUserSessionId() {
+export default function useUserAccessToken() {
   const session = useAuthContext()
-  return session?.user.id;
+  return session?.access_token;
 }

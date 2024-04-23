@@ -28,61 +28,64 @@ import ProjectViewer from "./Page/Projects/components/ProjectViewer";
 
 import ProjectPalette from "./Page/ProjectPalette";
 import supabaseClient from "./supabaseClient";
+import { AuthContextProvider } from "./context/AuthContext";
 export default function App() {
   return (
     <ErrorBoundary FallbackComponent={Fallback}>
-      <BrowserRouter>
-        <Toaster toastOptions={{ position: "bottom-right" }} />
-        <Container>
-          <Suspense fallback={<FallbackLoader />}>
-            <Routes>
-              <Route element={<Navbar />}>
-                <Route path="/" element={<Home />} />
-                <Route path="/generate" element={<ImageUpload />} />
-                <Route path="/palettes" element={<Explore />} />
-                <Route path="/feedback" element={<Feedback />} />
-                <Route path="/subscribe">
-                  <Route path="newsletter" element={<NewsLetter />} />
+      <AuthContextProvider>
+        <BrowserRouter>
+          <Toaster toastOptions={{ position: "bottom-right" }} />
+          <Container>
+            <Suspense fallback={<FallbackLoader />}>
+              <Routes>
+                <Route element={<Navbar />}>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/generate" element={<ImageUpload />} />
+                  <Route path="/palettes" element={<Explore />} />
+                  <Route path="/feedback" element={<Feedback />} />
+                  <Route path="/subscribe">
+                    <Route path="newsletter" element={<NewsLetter />} />
+                  </Route>
+                  <Route path="*" element={<h1>Not found</h1>} />
                 </Route>
-                <Route path="*" element={<h1>Not found</h1>} />
-              </Route>
 
-              <Route path="/user" element={<DashboardNavbar />}>
-                <Route
-                  path="dashboard"
-                  element={<Dashboard sidebarLinks={projectViewerLinks} />}
-                >
-                  <Route path="" element={<Navigate to="projects" />} />
-                  <Route path="projects" element={<Projects />}>
-                    <Route path="" element={<ProjectViewer />} />
+                <Route path="/user" element={<DashboardNavbar />}>
+                  <Route
+                    path="dashboard"
+                    element={<Dashboard sidebarLinks={projectViewerLinks} />}
+                  >
+                    <Route path="" element={<Navigate to="projects" />} />
+                    <Route path="projects" element={<Projects />}>
+                      <Route path="" element={<ProjectViewer />} />
+                    </Route>
+                    <Route
+                      path="favourites"
+                      element={<h1>{window.location.pathname}</h1>}
+                    />
+                    <Route
+                      path="keys"
+                      element={<h1>{window.location.pathname}</h1>}
+                    />
+                    <Route
+                      path="docs"
+                      element={<h1>{window.location.pathname}</h1>}
+                    />
                   </Route>
                   <Route
-                    path="favourites"
-                    element={<h1>{window.location.pathname}</h1>}
-                  />
-                  <Route
-                    path="keys"
-                    element={<h1>{window.location.pathname}</h1>}
-                  />
-                  <Route
-                    path="docs"
-                    element={<h1>{window.location.pathname}</h1>}
-                  />
+                    path="projects/:id"
+                    element={<Dashboard sidebarLinks={projectSettingsLinks} />}
+                  >
+                    <Route path="palette" element={<ProjectPalette />} />
+                    <Route path="settings" element={<h1>settings</h1>} />
+                    <Route path="usage" element={<h1>usage</h1>} />
+                  </Route>
                 </Route>
-                <Route
-                  path="projects/:id"
-                  element={<Dashboard sidebarLinks={projectSettingsLinks} />}
-                >
-                  <Route path="palette" element={<ProjectPalette />} />
-                  <Route path="settings" element={<h1>settings</h1>} />
-                  <Route path="usage" element={<h1>usage</h1>} />
-                </Route>
-              </Route>
-            </Routes>
-          </Suspense>
-        </Container>
-        <Footer />
-      </BrowserRouter>
+              </Routes>
+            </Suspense>
+          </Container>
+          <Footer />
+        </BrowserRouter>
+      </AuthContextProvider>
     </ErrorBoundary>
   );
 }

@@ -5,15 +5,21 @@ import {
   EyeIcon,
 } from "@heroicons/react/24/solid";
 import { useNavigate } from "react-router-dom";
+import { mutateSavePalette } from "../actions/mutateSavePalette";
+import useSavePalettes from "../../../services/useSavePalettes";
 
-export function LikeButton({ paletteID, userID }) {
-  const [like, setLike] = useState(false);
+export function LikeButton({ palettes, userID }) {
+  const { likeAction, unlikeAction, isLikePending } =
+    mutateSavePalette(palettes);
+  const { savedPalettes } = useSavePalettes();
+  const isLiked = savedPalettes?.includes(palettes.join("-"));
+  const {isLoading} = useSavePalettes()
   return (
     <Button
-      onClick={() => setLike((prev) => !prev)}
+      onClick={isLiked ? unlikeAction : likeAction}
       className="flex items-center h-full gap-x-1 text-sm font-semibold bg-neutral-800 hover:bg-neutral-700 px-5 py-2.5 rounded-lg"
     >
-      <Heart like={like} />
+      {isLoading?"Loading":<Heart like={isLiked} />}
     </Button>
   );
 }
@@ -44,6 +50,6 @@ function Button({ children, onClick }) {
 }
 
 function Heart({ like }) {
-  if (like) return <HeartIconSolid color="white" className="w-4" />;
+  if (like) return <HeartIconSolid color="red" className="w-4" />;
   return <HeartIconOutline color="white" className="w-4" />;
 }

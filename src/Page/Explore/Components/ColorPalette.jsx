@@ -3,7 +3,6 @@ import useIsMobile from "../../../hooks/useIsMobile";
 import getContrastingColor from "../../../utils/getContrastingColor";
 import { usePaletteConext } from "../cotext/paletteContext";
 import useColorClipboard from "../../../hooks/useColorClipboard";
-import PerfectScrollbar from "@opuscapita/react-perfect-scrollbar";
 
 import {
   LikeButton,
@@ -39,9 +38,9 @@ export default function ColorPalette({ colors }) {
   return (
     <div
       ref={lastPaletteReference}
-      className="flex flex-col w-full overflow-hidden bg-white dark:bg-neutral-800/50 rounded-xl p-4 border-2 transition-all duration-150 ease-in-out border-slate-200 dark:border-neutral-800 shadow-sm"
+      className="flex flex-col w-full overflow-hidden bg-neutral-800/50 rounded-xl p-4 border-2 transition-all duration-150 ease-in-out border-neutral-800 shadow-sm"
     >
-      <ul className="flex gap-2 w-full mb-4 overflow-x-scroll sm:overflow-auto">
+      <ul className="flex gap-2 w-full mb-4 overflow-x-scroll sm:overflow-hidden">
         {colors.map((color, index) => {
           return color ? (
             <PaletteItem
@@ -58,7 +57,7 @@ export default function ColorPalette({ colors }) {
           <UsePaletteInProject />
           <LivePreviewButton />
         </div>
-        <LikeButton />
+        <LikeButton palettes={colors}/>
       </div>
     </div>
   );
