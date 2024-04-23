@@ -3,9 +3,12 @@ import { savePalette, unSavePalette } from "../../../utils/paletteOperation";
 import toast from "react-hot-toast";
 import useUserAccessToken from "../../../hooks/useUserAccessToken";
 import { queryClient } from "../../../queryClient/queryClient";
+import { useMemberModalContext } from "../../../context/MemberModalContext";
+
 export function mutateSavePalette(palettes) {
   const userToken = useUserAccessToken();
   const key = ["saved-palettes", userToken];
+  const {handleModalOpen} = useMemberModalContext()
   const likeMutation = useMutation({
     mutationFn: () => savePalette(palettes, userToken),
     onMutate: async (newPalette) => {
@@ -51,7 +54,7 @@ export function mutateSavePalette(palettes) {
 
   function likeAction() {
     if (!userToken) {
-      alert("sign in first");
+      handleModalOpen()
       return;
     }
     likeMutation.mutate(
@@ -66,7 +69,7 @@ export function mutateSavePalette(palettes) {
 
   function unlikeAction() {
     if (!userToken) {
-      alert("sign in first");
+      handleModalOpen()
       return;
     }
     unlikeMutation.mutate(
