@@ -37,8 +37,8 @@ export default function App() {
   return (
     <ErrorBoundary FallbackComponent={Fallback}>
       <AuthContextProvider>
-        <MemberModalContextProvider>
-          <BrowserRouter>
+        <BrowserRouter>
+          <MemberModalContextProvider>
             <Toaster toastOptions={{ position: "bottom-right" }} />
             <Container>
               <Suspense fallback={<FallbackLoader />}>
@@ -93,8 +93,8 @@ export default function App() {
               </Suspense>
             </Container>
             <Footer />
-          </BrowserRouter>
-        </MemberModalContextProvider>
+          </MemberModalContextProvider>
+        </BrowserRouter>
       </AuthContextProvider>
     </ErrorBoundary>
   );

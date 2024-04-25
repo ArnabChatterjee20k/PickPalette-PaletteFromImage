@@ -11,7 +11,11 @@ export const AuthContextProvider = ({ children }) => {
       (event, session) => {
         if (event === "SIGNED_OUT") {
           setSession(null);
-        } else if (event === "SIGNED_IN") {
+        }else if(event === 'INITIAL_SESSION'){
+          console.log("inital")
+        }
+         else if (event === "SIGNED_IN") {
+          console.log("signed_in")
           setSession(session);
         } else if (session) {
           supabaseClient.auth.setSession(session);

@@ -1,6 +1,8 @@
 import * as AlertDialog from "@radix-ui/react-alert-dialog";
 import { createContext, useContext, useState } from "react";
 import { UserPlusIcon, ArrowLeftIcon,XCircleIcon } from "@heroicons/react/24/outline";
+import { useNavigate } from "react-router-dom";
+import useAuthRedirect from "../hooks/useAuthRedirect";
 const MemberModalContext = createContext(null);
 export const useMemberModalContext = () => useContext(MemberModalContext);
 export function MemberModalContextProvider({ children }) {
@@ -57,9 +59,16 @@ export default function Modal() {
 }
 
 export function SiginButton() {
+  const {handleModalClose} = useMemberModalContext()
+  const {redirectToSignin} = useAuthRedirect()
+  function handleClick(){
+    handleModalClose()
+    redirectToSignin()
+  }
   return (
     <button
       type="button"
+      onClick={handleClick}
       className="w-full flex items-center justify-center sm:justify-start gap-3 text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2"
     >
       <ArrowLeftIcon className="w-5 text-inherit" />
@@ -68,9 +77,16 @@ export function SiginButton() {
   );
 }
 export function SignupButton() {
+  const {redirectToSignup} = useAuthRedirect()
+  const {handleModalClose} = useMemberModalContext()
+  function handleClick(){
+    handleModalClose()
+    redirectToSignup()
+  }
   return (
     <button
       type="button"
+      onClick={handleClick}
       className="w-full flex items-center justify-center sm:justify-start gap-3 text-white hover:text-gray-900 bg-transparent hover:bg-white/70 border border-gray-300 focus:outline-none focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2"
     >
       {/* text inherit so that color from the button can added here */}

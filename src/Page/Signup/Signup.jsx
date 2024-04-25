@@ -2,8 +2,14 @@ import { SignUp } from "@supabase/auth-ui-react";
 import React from "react";
 import supabaseClient from "../../supabaseClient";
 import { ThemeSupa } from "@supabase/auth-ui-shared";
-import { Link } from "react-router-dom";
+import { Link, useLocation, Navigate } from "react-router-dom";
+import { useAuthContext } from "../../context/AuthContext";
+
 export default function Signup() {
+  const { state } = useLocation();
+  const redirectLocation = `${state?.redirectTo || "/user/dashboard/projects"}`;
+  const session = useAuthContext()
+  if(session) return <Navigate to={redirectLocation}/>
   return (
     <section className="flex items-center justify-center">
       <div className="w-[90%] max-w-[500px] mt-16">
@@ -11,6 +17,7 @@ export default function Signup() {
         <p>Create your account</p>
         <SignUp
           providers={["google"]}
+          redirectTo={redirectLocation}
           supabaseClient={supabaseClient}
           appearance={{
             theme: ThemeSupa,
@@ -31,7 +38,12 @@ export default function Signup() {
             },
           }}
         />
-        <Link to={"/user/signin"} className="flex justify-center underline text-gray-400 hover:text-white">Don't have an account? Signup</Link>
+        <Link
+          to={"/user/signin"}
+          className="flex justify-center underline text-gray-400 hover:text-white"
+        >
+          Already having an account? Signin
+        </Link>
       </div>
     </section>
   );
