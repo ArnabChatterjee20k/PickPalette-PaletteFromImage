@@ -9,6 +9,7 @@ export default function Signup() {
   const { state } = useLocation();
   const redirectLocation = `${state?.redirectTo || "/user/dashboard/projects"}`;
   const session = useAuthContext()
+  const prefix = window.location.host
   if(session) return <Navigate to={redirectLocation}/>
   return (
     <section className="flex items-center justify-center">
@@ -17,7 +18,7 @@ export default function Signup() {
         <p>Create your account</p>
         <SignUp
           providers={["google"]}
-          redirectTo={redirectLocation}
+          redirectTo={`${prefix}${redirectLocation}`}
           supabaseClient={supabaseClient}
           appearance={{
             theme: ThemeSupa,

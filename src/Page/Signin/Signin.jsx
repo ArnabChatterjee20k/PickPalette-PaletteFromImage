@@ -2,14 +2,14 @@ import { SignIn } from "@supabase/auth-ui-react";
 import React, { useEffect } from "react";
 import supabaseClient from "../../supabaseClient";
 import { ThemeSupa } from "@supabase/auth-ui-shared";
-import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
+import { Link, Navigate, useLocation } from "react-router-dom";
 import { useAuthContext } from "../../context/AuthContext";
 
 export default function Signin() {
   const session = useAuthContext()
-  const nav = useNavigate()
   const { state } = useLocation();
   const redirectLocation = `${state?.redirectTo || "/user/dashboard/projects"}`;
+  const prefix = window.location.host
   if(session) return <Navigate to={redirectLocation}/>
 
   return (
@@ -18,7 +18,7 @@ export default function Signin() {
         <h1 className="font-bold text-white text-4xl">SignIn</h1>
         <p>Access your account</p>
         <SignIn
-          redirectTo={redirectLocation}
+          redirectTo={`${prefix}${redirectLocation}`}
           providers={["google"]}
           supabaseClient={supabaseClient}
           appearance={{
