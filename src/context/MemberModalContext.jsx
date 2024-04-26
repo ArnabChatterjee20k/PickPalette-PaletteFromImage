@@ -29,8 +29,8 @@ export default function Modal() {
   return (
     <AlertDialog.Root open={open} onOpenChange={setOpen}>
       <AlertDialog.Portal>
-        <AlertDialog.Overlay className="bg-black/80 backdrop-blur-sm fixed inset-0 w-full" />
-        <AlertDialog.Content className="shadow-md fixed top-[50%] left-[50%] max-h-[85vh] flex flex-col sm:items-center w-[90%] max-w-[500px]  translate-x-[-50%] translate-y-[-50%] rounded-[6px] bg-[#0e0e0e] p-[25px]">
+        <AlertDialog.Overlay className="bg-black/80 backdrop-blur-sm fixed inset-0 w-full z-50" />
+        <AlertDialog.Content className="shadow-md fixed top-[50%] left-[50%] max-h-[85vh] flex flex-col sm:items-center w-[90%] max-w-[500px]  translate-x-[-50%] translate-y-[-50%] rounded-[6px] bg-[#0e0e0e] p-[25px] z-50">
           <AlertDialog.Title className="m-0 font-bold text-4xl text-stone-200">
             Members Only
           </AlertDialog.Title>
