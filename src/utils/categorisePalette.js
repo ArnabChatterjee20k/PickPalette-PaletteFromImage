@@ -1,104 +1,110 @@
 export default function categorizeColors(colors) {
     const categorizedColors = {
-        text: null,
-        background: null,
         primary: null,
         secondary: null,
+        tertiary: null,
+        background: null,
+        text: null,
         accent: null
     };
 
-    // Helper function to calculate perceived brightness
-    function calculateBrightness(color) {
-        const rgb = hexToRgb(color);
-        return (rgb.r * 299 + rgb.g * 587 + rgb.b * 114) / 1000;
-    }
+    const sortedColors = colors.sort((color1, color2) => {
+        const hsv1 = hexToHsv(color1);
+        const hsv2 = hexToHsv(color2);
+        return hsv1.v - hsv2.v;
+    });
 
-    // Helper function to calculate hue
-    function calculateHue(rgb) {
-        const { r, g, b } = rgb;
-        const max = Math.max(r, g, b);
-        const min = Math.min(r, g, b);
-        let hue = 0;
-
-        if (max === min) {
-            hue = 0;
-        } else if (max === r) {
-            hue = 60 * ((g - b) / (max - min));
-        } else if (max === g) {
-            hue = 60 * (2 + (b - r) / (max - min));
-        } else {
-            hue = 60 * (4 + (r - g) / (max - min));
+    // Function to find the most visually pleasing combination of colors
+    const findBestCombination = (categories, remainingColors) => {
+        if (remainingColors.length === 0 || categories.some(category => categorizedColors[category] !== null)) {
+            return;
         }
 
-        return hue < 0 ? hue + 360 : hue;
-    }
+        const category = categories.shift();
+        let bestColor = null;
+        let minDistance = Infinity;
 
-    // Find the darkest and lightest colors
-    const sortedColors = colors.sort((a, b) => calculateBrightness(a) - calculateBrightness(b));
-    const darkestColor = sortedColors[0];
-    const lightestColor = sortedColors[sortedColors.length - 1];
+        for (const color of remainingColors) {
+            const distance = calculateColorDistance(color, categorizedColors);
+            if (distance < minDistance) {
+                bestColor = color;
+                minDistance = distance;
+            }
+        }
 
-    // Assign darkest color to background and lightest color to text
-    categorizedColors.background = darkestColor;
-    categorizedColors.text = lightestColor;
+        categorizedColors[category] = bestColor;
 
-    // Find the accent color
-    const accentColor = sortedColors.find(color => color !== darkestColor && color !== lightestColor);
+        const newRemainingColors = remainingColors.filter(color => color !== bestColor);
+        findBestCombination(categories, newRemainingColors);
+    };
 
-    // Assign accent color
-    categorizedColors.accent = accentColor;
+    // Initially categorize based on basic rules
+    categorizedColors.background = sortedColors[0];
+    categorizedColors.text = sortedColors[sortedColors.length - 1];
 
-    // Filter out colors close to the background and accent colors
-    const filteredColors = sortedColors.filter(color =>
-        color !== darkestColor &&
-        color !== lightestColor &&
-        color !== accentColor
-    );
-
-    // Calculate hue for remaining colors
-    const hueValues = filteredColors.map(color => calculateHue(hexToRgb(color)));
-
-    // Find primary color
-    const primaryColorIndex = hueValues.findIndex(
-        hue => hue >= 30 && hue <= 150 && !isSimilarToBackground(filteredColors[hueValues.indexOf(hue)], categorizedColors.background)
-    );
-    if (primaryColorIndex !== -1) {
-        categorizedColors.primary = filteredColors[primaryColorIndex];
-    }
-
-    // Find secondary color
-    const secondaryColorIndex = hueValues.findIndex(
-        hue => hue >= 180 && hue <= 270 && !isSimilarToBackground(filteredColors[hueValues.indexOf(hue)], categorizedColors.background)
-    );
-    if (secondaryColorIndex !== -1) {
-        categorizedColors.secondary = filteredColors[secondaryColorIndex];
-    }
+    const remainingColors = sortedColors.slice(1, sortedColors.length - 1);
+    findBestCombination(['primary', 'secondary', 'tertiary', 'accent'], remainingColors);
 
     return categorizedColors;
 }
 
-// Helper function to convert hex color to RGB
-function hexToRgb(hex) {
-    const bigint = parseInt(hex.slice(1), 16);
-    const r = (bigint >> 16) & 255;
-    const g = (bigint >> 8) & 255;
-    const b = bigint & 255;
-    return { r, g, b };
+function calculateColorDistance(color, categorizedColors) {
+    let minDistance = Infinity;
+    for (const category in categorizedColors) {
+        if (categorizedColors[category] !== null) {
+            const distance = getColorDistance(color, categorizedColors[category]);
+            if (distance < minDistance) {
+                minDistance = distance;
+            }
+        }
+    }
+    return minDistance;
 }
 
-// Helper function to check if a color is similar to the background color
-function isSimilarToBackground(color, background) {
-    const bgRgb = hexToRgb(background);
-    const colorRgb = hexToRgb(color);
+function getColorDistance(color1, color2) {
+    const hsv1 = hexToHsv(color1);
+    const hsv2 = hexToHsv(color2);
 
-    // Calculate color difference using Euclidean distance
-    const distance = Math.sqrt(
-        Math.pow(bgRgb.r - colorRgb.r, 2) +
-        Math.pow(bgRgb.g - colorRgb.g, 2) +
-        Math.pow(bgRgb.b - colorRgb.b, 2)
-    );
+    const hueDistance = Math.min(Math.abs(hsv1.h - hsv2.h), 360 - Math.abs(hsv1.h - hsv2.h));
+    const saturationDistance = Math.abs(hsv1.s - hsv2.s);
+    const valueDistance = Math.abs(hsv1.v - hsv2.v);
 
-    // Threshold for similarity (adjust as needed)
-    const threshold = 100;
-    return distance < threshold;
+    return Math.sqrt(hueDistance ** 2 + saturationDistance ** 2 + valueDistance ** 2);
+}
+
+// Convert hex color to HSV
+function hexToHsv(hex) {
+    // Convert hex to RGB
+    const r = parseInt(hex.substring(1, 3), 16) / 255;
+    const g = parseInt(hex.substring(3, 5), 16) / 255;
+    const b = parseInt(hex.substring(5, 7), 16) / 255;
+
+    // Find the minimum and maximum values of RGB
+    const min = Math.min(r, g, b);
+    const max = Math.max(r, g, b);
+    const delta = max - min;
+
+    let h, s, v;
+
+    // Calculate hue
+    if (delta === 0) {
+        h = 0;
+    } else if (max === r) {
+        h = ((g - b) / delta) % 6;
+    } else if (max === g) {
+        h = (b - r) / delta + 2;
+    } else {
+        h = (r - g) / delta + 4;
+    }
+
+    h = Math.round(h * 60);
+    if (h < 0) h += 360;
+
+    // Calculate saturation
+    s = max === 0 ? 0 : delta / max;
+
+    // Calculate value
+    v = max;
+
+    return { h, s, v };
 }
