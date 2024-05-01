@@ -55,7 +55,7 @@ export default function ColorPalette({ colors }) {
       <div className="flex justify-between">
         <div className="flex gap-3">
           <UsePaletteInProject />
-          <LivePreviewButton />
+          <LivePreviewButton palettes={colors}/>
         </div>
         <LikeButton palettes={colors}/>
       </div>

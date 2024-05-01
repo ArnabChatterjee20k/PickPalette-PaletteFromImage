@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { mutateSavePalette } from "../actions/mutateSavePalette";
 import useSavePalettes from "../../../services/useSavePalettes";
 import { motion } from "framer-motion";
+import categorizeColors from "../../../utils/categorisePalette";
 
 export function LikeButton({ palettes, userID }) {
   const { likeAction, unlikeAction, isLikePending } =
@@ -26,8 +27,10 @@ export function LikeButton({ palettes, userID }) {
 }
 export function LivePreviewButton({ palettes }) {
   const nav = useNavigate();
+  const categorisedPalettes = new URLSearchParams(categorizeColors(palettes));
+  const url = `/preview?${categorisedPalettes.toString()}`;
   return (
-    <Button>
+    <Button onClick={() => nav(url)}>
       <EyeIcon className="w-4" color="white" />
     </Button>
   );

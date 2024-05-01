@@ -2,7 +2,15 @@ import { LinkIcon, XCircleIcon } from "@heroicons/react/24/outline";
 import { Cog8ToothIcon } from "@heroicons/react/24/solid";
 import Charts from "../components/Charts";
 import Medal from "../components/Medal";
-export default function DashboardStatus() {
+import { useEffect } from "react";
+const keys = ["text", "background", "secondary", "primary", "accent"];
+export default function DashboardStatus(props) {
+  useEffect(() => {
+    const root_theme = document.querySelector(":root");
+    keys.forEach((color) => {
+      if (props[color]) root_theme.style.setProperty(`--${color}`,props[color]);
+    });
+  }, []);
   return (
     <div className="bg-background flex flex-col max-w-md w-[80%] sm:w-[60%] rounded-md p-5 gap-4">
       <Header />
