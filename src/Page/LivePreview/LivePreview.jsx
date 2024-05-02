@@ -23,7 +23,7 @@ export default function LivePreview() {
     });
   }, [search]);
   return (
-    <section className="w-full bg-white min-h-screen flex flex-col items-center justify-center">
+    <section className="w-full bg-white min-h-screen flex flex-col items-center justify-evenly">
       <DashboardStatus />
       <ColorBar keys={keys} />
     </section>
