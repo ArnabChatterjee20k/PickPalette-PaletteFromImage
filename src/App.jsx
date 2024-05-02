@@ -32,6 +32,7 @@ import { AuthContextProvider } from "./context/AuthContext";
 import { MemberModalContextProvider } from "./context/MemberModalContext";
 import Signin from "./Page/Signin/Signin";
 import Signup from "./Page/Signup/Signup";
+import LivePreview from "./Page/LivePreview/LivePreview";
 
 export default function App() {
   return (
@@ -51,6 +52,7 @@ export default function App() {
                     <Route path="/subscribe">
                       <Route path="newsletter" element={<NewsLetter />} />
                     </Route>
+                    <Route path="/preview" element={<LivePreview />} />
                     <Route path="*" element={<h1>Not found</h1>} />
                   </Route>
 
