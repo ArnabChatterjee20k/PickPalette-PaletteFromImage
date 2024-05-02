@@ -31,7 +31,7 @@ function Status() {
   return (
     <div className="full flex-col gap-3">
       <div className="bg-primary relative w-full rounded-sm h-[150px] sm:h-[250px] flex items-center">
-        <Charts className="absolute fill-text inset-0  m-2 w-5 sm:w-7" />
+        <Charts className="absolute fill-accent inset-0  m-2 w-5 sm:w-7" />
         <div className="flex items-end w-full justify-center gap-2 ">
           <p className="text-6xl font-extrabold text-text">42</p>
           <p className="text-text text-sm mb-1 font-bold">ACTIVE USERS</p>
@@ -40,7 +40,7 @@ function Status() {
 
       <div className="flex mt-3 gap-3 h-[120px] sm:h-[150px]">
         <div className="bg-secondary relative w-full rounded-sm flex items-center">
-          <Medal className="absolute fill-text inset-0  m-2 w-5 sm:w-7" />
+          <Medal className="absolute fill-accent inset-0  m-2 w-5 sm:w-7" />
           <div className="flex items-start w-full justify-center gap-1">
             <p className="text-4xl font-extrabold text-text">17</p>
             <p className="text-text font-bold mt-1 text-sm">%</p>
@@ -48,7 +48,7 @@ function Status() {
         </div>
 
         <div className="bg-tertiary relative w-full rounded-sm flex items-center">
-          <Medal className="absolute fill-text inset-0  m-2 w-5 sm:w-7" />
+          <Medal className="absolute fill-accent inset-0  m-2 w-5 sm:w-7" />
           <div className="flex items-start w-full justify-center">
             <p className="text-4xl font-extrabold text-text">12</p>
             <p className="text-text font-bold mt-1 text-sm">%</p>
