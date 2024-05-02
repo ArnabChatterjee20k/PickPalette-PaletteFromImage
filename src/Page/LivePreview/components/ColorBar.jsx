@@ -33,7 +33,7 @@ export default function ColorBar({ keys }) {
     setColors((prevColors) => ({ ...prevColors, [colorVariable]: newColor }));
   }
   return (
-    <div className="flex gap-[0.20rem] p-1 bg-gray-200 rounded-md">
+    <div className="flex gap-[0.20rem] p-1 bg-gray-200 rounded-md flex-wrap">
       {Object.entries(colors).map(([colorVariable, color], idx) => (
         <ColorPicker
           key={colorVariable}
@@ -60,14 +60,22 @@ function ColorPicker({ colorVariable, currentColor, changePalette }) {
     setParams({ ...paramsData, [colorVariable]: newColor });
   }
 
-  const fontColor = getContrastingColor(currentColor);
+  const bgColor =
+    params.get(colorVariable) ||
+    getComputedStyle(document.documentElement).getPropertyValue(
+      `--${colorVariable}`
+    );
+
+  const fontColor = getContrastingColor(bgColor);
 
   return (
     <Menubar.Root>
       <Menubar.Menu>
         <Menubar.Trigger
-          style={{ backgroundColor: currentColor }}
           className={`px-5 py-2.5 rounded-[5px] font-medium`}
+          style={{
+            backgroundColor: bgColor,
+          }}
         >
           <h4 style={{ color: fontColor }}>
             {colorVariable[0].toUpperCase() +

@@ -15,11 +15,15 @@ export default function LivePreview() {
   const [params, setParams] = useSearchParams();
   const { search } = useLocation();
   useEffect(() => {
-    // it is basically syncing the style of dom with the searh param and the url
     const root_theme = document.querySelector(":root");
     keys.forEach((color) => {
-      if (params.get(color))
-        root_theme.style.setProperty(`--${color}`, params.get(color));
+      if (params.get(color)) {
+        let timeoutId;
+        timeoutId = setTimeout(() => {
+          root_theme.style.setProperty(`--${color}`, params.get(color));
+          if (timeoutId) clearImmediate(timeoutId);
+        }, 200);
+      }
     });
   }, [search]);
   return (
