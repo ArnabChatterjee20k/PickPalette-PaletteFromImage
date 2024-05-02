@@ -1,7 +1,9 @@
 ### ToDo
+
 - Handle edge cases when user session get expired during fetching , palettes update
 - Handle edge cases of authorisation while fetching
 - Handle error state of ui in projects page
+
 ### Learnings
 
 <details>
@@ -46,5 +48,33 @@
        <li>If during manual save some changes performed, stack them up. And make another request with another set of data which will be autosaving</li>
     </p>
 </details>
+
+<details>
+    <summary>Using color theory for choosing the best color from inputs of color. The code is present in utils/categoriseColor.js</summary>
+    <p>
+
+1. **Define the `categorizedColors` object**: The algorithm starts by defining an object `categorizedColors` with properties for `primary`, `secondary`, `tertiary`, `background`, `text`, and `accent` colors. Initially, all these properties are set to `null`.
+
+2. **Sort the input colors by perceived brightness**: The input array `colors` is sorted in ascending order of perceived brightness using the formula `(r * 299 + g * 587 + b * 114) / 1000`, where `r`, `g`, and `b` are the red, green, and blue values of the color, respectively. This formula approximates how humans perceive the brightness of a color.
+
+3. **Assign the background color**: The darkest color from the sorted array (`sortedColors[0]`) is assigned to `categorizedColors.background`.
+
+4. **Find the most visually distinct colors**: The `findBestCombination` function is used to assign the `primary`, `secondary`, and `tertiary` colors. It does this by iterating over the remaining colors (excluding the background color) and calculating the color distance between each remaining color and the already assigned colors in `categorizedColors`. The color with the maximum distance is selected as the best color for the current category (`primary`, `secondary`, or `tertiary`). This ensures that the selected colors are visually distinct from each other.
+
+5. **Assign the text color**: The `findContrastingColor` function is used to assign the `text` color. It takes the `background` color and an array of remaining colors as input. It iterates over the remaining colors and finds the color with the maximum contrast (brightness difference) from the `background` color, ensuring that it's not equal to any of the `primary`, `secondary`, or `tertiary` colors.
+
+6. **Assign the accent color**: The `accent` color is assigned as the lightest remaining color from the input array. This is done by creating an array `accentColors` that contains all the remaining colors that haven't been assigned to any other category (`primary`, `secondary`, `tertiary`, `background`, or `text`), and then assigning the last color in the `accentColors` array (which will be the lightest color due to the sorting) to `categorizedColors.accent`.
+
+The core functionality of the algorithm is achieved through the following helper functions:
+
+- `calculateColorDistance`: This function calculates the maximum color distance between a given color and the already assigned colors in `categorizedColors`. It does this by iterating over the assigned colors and calculating the Euclidean distance between the given color and each assigned color in the RGB color space. The maximum distance is returned.
+
+- `getColorDistance`: This function calculates the Euclidean distance between two colors in the RGB color space using the formula `sqrt((r1 - r2)^2 + (g1 - g2)^2 + (b1 - b2)^2)`, where `r1`, `g1`, `b1` and `r2`, `g2`, `b2` are the red, green, and blue values of the two colors, respectively.
+
+- `findContrastingColor`: This function takes a base color and an array of sorted colors as input. It iterates over the sorted colors and finds the color with the maximum contrast (brightness difference) from the base color. The contrast is calculated as the absolute difference between the perceived brightness of the base color and the sorted color. The color with the maximum contrast is returned, ensuring that it's not equal to the base color.
+
+By following these steps and using the helper functions, the algorithm assigns visually distinct colors to the `primary`, `secondary`, and `tertiary` properties, finds a contrasting color for the `text` property, and assigns the lightest remaining color as the `accent` color. The `background` color is set to the darkest color from the input array. The algorithm ensures that all assigned colors are present in the input array, and it satisfies the business cases of having the `text` color distinct from `primary`, `secondary`, and `tertiary`, and the `accent` color being the lightest remaining color.
+
+</p>
 
 </details>
