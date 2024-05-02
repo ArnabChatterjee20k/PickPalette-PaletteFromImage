@@ -17,9 +17,8 @@ export default function categorizeColors(colors) {
     return brightnessA - brightnessB; // Sort in ascending order of brightness
   });
 
-  // Assign background and text colors
+  // Assign background color
   categorizedColors.background = sortedColors[0]; // Darkest color
-  categorizedColors.text = sortedColors[sortedColors.length - 1]; // Lightest color
 
   // Function to find the most visually pleasing combination of colors
   const findBestCombination = (categories, remainingColors) => {
@@ -42,22 +41,16 @@ export default function categorizeColors(colors) {
   };
 
   // Calculate color distances and assign colors
-  const remainingColors = sortedColors.slice(1, sortedColors.length - 1);
-  findBestCombination(['primary', 'secondary', 'tertiary', 'accent'], remainingColors);
+  const remainingColors = sortedColors.slice(1, sortedColors.length);
+  findBestCombination(['primary', 'secondary', 'tertiary'], remainingColors);
 
-  // Assign any remaining colors to unassigned properties
-  const assignedColors = Object.values(categorizedColors).filter(color => color !== null);
-  const unassignedProperties = Object.entries(categorizedColors).filter(([_, color]) => color === null).map(([prop]) => prop);
+  // Assign text color
+  const textColors = sortedColors.filter(color => !Object.values(categorizedColors).includes(color));
+  categorizedColors.text = findContrastingColor(categorizedColors.background, textColors);
 
-  for (const property of unassignedProperties) {
-    for (const color of sortedColors) {
-      if (!assignedColors.includes(color)) {
-        categorizedColors[property] = color;
-        assignedColors.push(color);
-        break;
-      }
-    }
-  }
+  // Assign accent color
+  const accentColors = sortedColors.filter(color => !Object.values(categorizedColors).includes(color));
+  categorizedColors.accent = accentColors[accentColors.length - 1]; // Assign the lightest remaining color as accent
 
   return categorizedColors;
 }
@@ -79,4 +72,25 @@ function getColorDistance(color1, color2) {
   const [r1, g1, b1] = color1.substring(1).match(/.{2}/g).map(x => parseInt(x, 16));
   const [r2, g2, b2] = color2.substring(1).match(/.{2}/g).map(x => parseInt(x, 16));
   return Math.sqrt((r1 - r2) ** 2 + (g1 - g2) ** 2 + (b1 - b2) ** 2);
+}
+
+function findContrastingColor(baseColor, sortedColors) {
+  let maxContrast = -Infinity;
+  let contrastingColor = null;
+  const [r, g, b] = baseColor.substring(1).match(/.{2}/g).map(x => parseInt(x, 16));
+  const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+
+  for (const color of sortedColors) {
+    if (color !== baseColor) {
+      const [rColor, gColor, bColor] = color.substring(1).match(/.{2}/g).map(x => parseInt(x, 16));
+      const colorBrightness = (rColor * 299 + gColor * 587 + bColor * 114) / 1000;
+      const contrast = Math.abs(brightness - colorBrightness);
+      if (contrast > maxContrast) {
+        maxContrast = contrast;
+        contrastingColor = color;
+      }
+    }
+  }
+
+  return contrastingColor;
 }
