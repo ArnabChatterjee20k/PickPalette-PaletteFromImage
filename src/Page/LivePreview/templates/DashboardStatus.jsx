@@ -3,12 +3,21 @@ import { Cog8ToothIcon } from "@heroicons/react/24/solid";
 import Charts from "../components/Charts";
 import Medal from "../components/Medal";
 import { useEffect } from "react";
-const keys = ["text", "background", "secondary", "primary", "accent"];
+const keys = [
+  "text",
+  "background",
+  "secondary",
+  "primary",
+  "tertiary",
+  "accent",
+];
 export default function DashboardStatus(props) {
+  console.log({props})
   useEffect(() => {
     const root_theme = document.querySelector(":root");
     keys.forEach((color) => {
-      if (props[color]) root_theme.style.setProperty(`--${color}`,props[color]);
+      if (props[color])
+        root_theme.style.setProperty(`--${color}`, props[color]);
     });
   }, []);
   return (

@@ -6,7 +6,7 @@ export default function LivePreview() {
     const [params,setParams] = useSearchParams()
   return (
     <section className="w-full bg-white min-h-screen flex flex-col items-center justify-center">
-      <DashboardStatus accent={params.get("accent")} background={params.get("background")} secondary={params.get("secondary")} primary={params.get("primary")} text={params.get("text")}/>
+      <DashboardStatus accent={params.get("accent")} background={params.get("background")} secondary={params.get("secondary")} primary={params.get("primary")} tertiary={params.get("tertiary")} text={params.get("text")}/>
     </section>
   );
 }
