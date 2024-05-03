@@ -9,6 +9,13 @@ import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import HamburgerMenu from "../components/HamburgerMenu";
 import { useMemberModalContext } from "../context/MemberModalContext";
 import { useAuthContext } from "../context/AuthContext";
+import GithubIcon from "../components/GithubIcon";
+import ProductHuntIcon from "../components/ProductHuntIcon";
+
+const PRODUCTHUNT_LINK =
+  "https://www.producthunt.com/products/pickpalette?utm_source=badge-featured&utm_medium=badge#pickpalette";
+const GITHUB_LINK =
+  "https://github.com/ArnabChatterjee20k/PickPalette-PaletteFromImage";
 
 export default function Navbar() {
   return (
@@ -20,9 +27,10 @@ export default function Navbar() {
             {ProductExplorationLinks.map(({ group, links }) => (
               <DesktopMenu group={group} links={links} key={group} />
             ))}
+            <SocialDropDown />
           </div>
           <div className="hidden sm:block ml-auto">
-            <ProjectDashboardLink/>
+            <ProjectDashboardLink />
           </div>
           <div className="ml-auto sm:hidden">
             <MobileMenu groupsWithLinks={ProductExplorationLinks} />
@@ -33,6 +41,55 @@ export default function Navbar() {
     </>
   );
 }
+
+const SocialDropDown = () => {
+  return (
+    <DropdownMenu.Root>
+      <DropdownMenu.Trigger asChild>
+        <button
+          className={`gap-2 border-gray-700 text-white hover:bg-gray-700 font-bold rounded-md text-sm px-3 py-1.5 text-center inline-flex items-center`}
+        >
+          Socials
+          <ChevronDownIcon className="w-4 h-4 " />
+        </button>
+      </DropdownMenu.Trigger>
+      <DropdownMenu.Portal>
+        <DropdownMenu.Content
+          className="py-2 rounded text-sm font-medium bg-gray-700 text-white max-w-md flex flex-col gap-3 z-50 ml-5"
+          sideOffset={6}
+        >
+          <SocialDropDownItems />
+        </DropdownMenu.Content>
+      </DropdownMenu.Portal>
+    </DropdownMenu.Root>
+  );
+};
+
+const SocialDropDownItems = () => {
+  return (
+    <>
+      <DropdownMenu.Item asChild>
+        <a
+          href={GITHUB_LINK}
+          className={`flex items-center px-4 py-2 gap-2 hover:text-blue-300`}
+        >
+          <GithubIcon className="text-white w-4 h-4" />
+          Github
+        </a>
+      </DropdownMenu.Item>
+      <DropdownMenu.Item asChild>
+        <a
+          href={PRODUCTHUNT_LINK}
+          className={`flex items-center px-4 py-2 gap-2 hover:text-blue-300`}
+        >
+          <ProductHuntIcon className="w-4 h-4 fill-[#DA552F] group-hover:fill-slate-600 dark:group-hover:fill-white" />
+          ProductHunt
+        </a>
+      </DropdownMenu.Item>
+    </>
+  );
+};
+
 const ProjectDashboardLink = () => {
   const nav = useNavigate();
   const { handleModalOpen } = useMemberModalContext();
@@ -135,6 +192,9 @@ const MobileMenu = ({ groupsWithLinks }) => {
               </DropdownMenu.Group>
             );
           })}
+          <DropdownMenu.Group>
+            <SocialDropDownItems />
+          </DropdownMenu.Group>
           <DropdownMenu.Group>
             <DropdownMenu.Item className="px-2">
               <ProjectDashboardLink />

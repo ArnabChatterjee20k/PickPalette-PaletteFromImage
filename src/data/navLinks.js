@@ -17,7 +17,11 @@ export const ProductExplorationLinks = [
   {
     group: "News",
     links: [
-      { label: "Newsletter", link: "/subscribe/newsletter", Icon: NewspaperIcon },
+      {
+        label: "Newsletter",
+        link: "/subscribe/newsletter",
+        Icon: NewspaperIcon,
+      },
       { label: "Feedback", link: "/feedback", Icon: ChatBubbleLeftIcon },
     ],
   },
