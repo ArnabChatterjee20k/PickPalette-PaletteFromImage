@@ -1,8 +1,28 @@
-### ToDo
+### About
 
-- Handle edge cases when user session get expired during fetching , palettes update
-- Handle edge cases of authorisation while fetching
-- Handle error state of ui in projects page
+![Product Image](./docs/Intro.avif)
+
+Discover endless color possibilities with PickPalette – effortlessly generate palettes from images, explore diverse schemes, and soon, manage them on a dynamic dashboard. Elevate your design process with our upcoming AI suggestions and visualization tools.
+
+- Backend Packages -> https://github.com/ArnabChatterjee20k/PickPalette-Backend/blob/main/packages/supabase-edge-functions/Readme.md
+
+- Live Link -> https://pickpalette.netlify.app/
+
+### Features
+
+- A palette hub consisting of more than 2500+ proved colors and it is regularly updated
+
+- Preview mode for testing out the palettes and the algorithm for choosing the correct combination of colors is built from the color theory itself. So choose your colors out of the box and feel free to edit. It is instant as no AI is used and it is developed using general problem solving
+
+- Generate colors from images instantly using image processing.
+
+- Lost while choosing colors? A dashboard to cater you. You have your dashboard with seamless optimistic user experience and you just go on editing the colors without any breakdown.
+
+  > **TODO**: A NPM package is on the way to connect the dashboard to your tailwind projects so that you can edit colors directly from your dashboard without any prod builds and it will get instantly reflected in your website.
+
+- From tech point of view,it is corely focused on the user experience as I personally believe every clicks, every touch ,every popup matters. And both the frontend and backend along with data serving layer matters. You can see the learning section to see the algorithms I developed while buiding this. Like the recursive priority algorithm for the scheduler in the dashboard or the color randomiser along with choosing the best color comibination.
+
+  For the backend migrations and deployments, you can watch the backend repo
 
 ### Learnings
 
@@ -78,3 +98,9 @@ By following these steps and using the helper functions, the algorithm assigns v
 </p>
 
 </details>
+
+### ToDo
+
+- Handle edge cases when user session get expired during fetching , palettes update
+- Handle edge cases of authorisation while fetching
+- Handle error state of ui in projects page
