@@ -1,4 +1,4 @@
-### About
+# About
 
 ![Product Image](./docs/Intro.avif)
 
@@ -8,7 +8,7 @@ Discover endless color possibilities with PickPalette – effortlessly generate 
 
 - Live Link -> https://pickpalette.netlify.app/
 
-### Features
+# Features
 
 - A palette hub consisting of more than 2500+ proved colors and it is regularly updated
 
@@ -24,7 +24,29 @@ Discover endless color possibilities with PickPalette – effortlessly generate 
 
   For the backend migrations and deployments, you can watch the backend repo
 
-### Learnings
+# Gettin Started
+
+### Code of Conduct
+Please review our [Code of Conduct](CODE_OF_CONDUCT.md) before contributing to our project. We want to maintain a welcoming and inclusive community.
+
+### Local Setup
+* Tech Stack in the frontend -> React js , vite, zustand, supabase, tailwind, radix ui
+* Run ``` npm i ```
+* Make a ```.env``` file and copy all the content from ```.env.example```
+* Make sure your supabase is setup with the db schema and functions and other stuff. They are mentioned in the [backend repo](https://github.com/ArnabChatterjee20k/PickPalette-Backend/blob/main/packages/supabase-edge-functions/Readme.md)
+* For palette hub, the current database data will not be provided. Run the scraper and backend packages to setup all those. Already scripts are written and if any issue occurs , then they are present in the service provider documentation
+
+### Contributing guidelines
+
+1. Assign yourself to the issue if it's not already assigned.
+2. Fork the repository to your GitHub account.
+3. Create a branch with a descriptive name related to the issue (e.g., `fix-bug-123` or `feature-xyz`).
+4. Work on the issue, making sure to follow our [contributing guidelines](Contributing.md).
+5. Create a Pull Request (PR) when you're ready. Reference the issue number in the PR description.
+6. Our team will review your PR and provide feedback. Be prepared to make changes if necessary.
+7. Solve merge conflicts before making pr
+
+# Learnings
 
 <details>
     <summary>Zustand + React Query(Async State Management) for building auto save feature</summary>
