@@ -34,6 +34,8 @@ import Signin from "./Page/Signin/Signin";
 import Signup from "./Page/Signup/Signup";
 import LivePreview from "./Page/LivePreview/LivePreview";
 
+import RouteNotFound from './Page/RouteNotFound/RouteNotFound';
+
 export default function App() {
   return (
     <ErrorBoundary FallbackComponent={Fallback}>
@@ -53,7 +55,7 @@ export default function App() {
                       <Route path="newsletter" element={<NewsLetter />} />
                     </Route>
                     <Route path="/preview" element={<LivePreview />} />
-                    <Route path="*" element={<h1>Not found</h1>} />
+                    <Route path="*" element={<RouteNotFound/>} />
                   </Route>
 
                   <Route path="/user" element={<DashboardNavbar />}>
