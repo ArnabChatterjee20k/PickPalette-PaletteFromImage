@@ -7,7 +7,7 @@ export default function Hero() {
   return (
     <>
       <section>
-        <div className="flex flex-col-reverse justify-center lg:flex-row max-w-screen-xl px-4 pb-20 mx-auto overflow-hidden relative">
+        <div className="flex flex-col-reverse justify-center lg:flex-row max-w-screen-xl px-4 pb-20 mx-auto  relative">
           <HeroText />
           <ImageSection />
         </div>
