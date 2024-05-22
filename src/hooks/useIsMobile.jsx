@@ -6,8 +6,11 @@ export default function useIsMobile() {
 }
 
 export function useIsTablet() {
-  return useMediaQuery("(max-width:1024px)");
+  return useMediaQuery("(max-width:1023.98px)");
 }
 export function useIsPad() {
   return useMediaQuery("(max-width:672px)");
+}
+export function useIsExactTabletWidth() {
+  return useMediaQuery("(width: 1024px)");
 }
