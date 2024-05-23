@@ -8,9 +8,9 @@ import { useAuthContext } from "../../context/AuthContext";
 export default function Signup() {
   const { state } = useLocation();
   const redirectLocation = `${state?.redirectTo || "/user/dashboard/projects"}`;
-  const session = useAuthContext()
-  const prefix = window.location.host
-  if(session) return <Navigate to={redirectLocation}/>
+  const session = useAuthContext();
+  const prefix = window.location.host;
+  if (session) return <Navigate to={redirectLocation} />;
   return (
     <section className="flex items-center justify-center">
       <div className="w-[90%] max-w-[500px] mt-16">
@@ -34,8 +34,8 @@ export default function Signup() {
             className: {
               divider: "hidden",
               button:
-                "w-full text-[#4a72f7] hover:text-white bg-transparent border border-[#4a72f7] hover:bg-[#4671ff] focus:ring-4 focus:ring-blue-500",
-              input: "text-white",
+                "w-full text-[#ffffff] hover:text-white bg-transparent border border-[#4a72f7] hover:bg-[#4671ff] focus:ring-4 focus:ring-blue-500",
+              input: "text-[#fff]",
             },
           }}
         />
