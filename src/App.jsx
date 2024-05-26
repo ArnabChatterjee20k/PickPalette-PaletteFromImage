@@ -33,6 +33,7 @@ import { MemberModalContextProvider } from "./context/MemberModalContext";
 import Signin from "./Page/Signin/Signin";
 import Signup from "./Page/Signup/Signup";
 import LivePreview from "./Page/LivePreview/LivePreview";
+import NotFound from "./Page/NotFound/NotFound";
 
 export default function App() {
   return (
@@ -53,7 +54,7 @@ export default function App() {
                       <Route path="newsletter" element={<NewsLetter />} />
                     </Route>
                     <Route path="/preview" element={<LivePreview />} />
-                    <Route path="*" element={<h1>Not found</h1>} />
+                    <Route path="*" element={<NotFound/>} />
                   </Route>
 
                   <Route path="/user" element={<DashboardNavbar />}>
