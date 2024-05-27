@@ -8,6 +8,7 @@ import Footer from "./components/Footer";
 const Home = lazy(() => import("./Page/Home/Home"));
 const ImageUpload = lazy(() => import("./Page/ImageUpload/ImageUpload"));
 const Explore = lazy(() => import("./Page/Explore/Explore"));
+const NotFound=lazy(()=>import("./Page/NotFound/NotFound"))
 
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import FallbackLoader from "./loaders/FallbackLoader";
@@ -33,7 +34,7 @@ import { MemberModalContextProvider } from "./context/MemberModalContext";
 import Signin from "./Page/Signin/Signin";
 import Signup from "./Page/Signup/Signup";
 import LivePreview from "./Page/LivePreview/LivePreview";
-import NotFound from "./Page/NotFound/NotFound";
+// import NotFound from "./Page/NotFound/NotFound";
 
 export default function App() {
   return (
