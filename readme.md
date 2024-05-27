@@ -8,6 +8,8 @@ Discover endless color possibilities with PickPalette – effortlessly generate 
 
 - Live Link -> https://pickpalette.netlify.app/
 
+- Chrome Extension -> https://github.com/ArnabChatterjee20k/PickPalette-ChromeExtension
+
 # Features
 
 - A palette hub consisting of more than 2500+ proved colors and it is regularly updated
