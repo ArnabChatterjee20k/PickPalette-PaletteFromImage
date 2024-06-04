@@ -1,0 +1,39 @@
+.banner {
+  background-color: #1E293B; /* Updated background color */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width:350px;
+  height: 150px;
+  margin-left: 76%;
+  position: relative;
+  bottom: 200px;
+  
+}
+
+.banner-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.button-style {
+  width: 100px;
+  background-color: #2BC6A2; /* Updated button background color */
+  color: #fff;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  font-family: 'Pacifico, cursive';
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Added transition for transform */
+}
+
+.button-style:hover {
+  background-color: gold;
+  font-weight: bold; /* Make text bold on hover */
+  transform: scale(1.1); /* Enlarge button on hover */
+}
