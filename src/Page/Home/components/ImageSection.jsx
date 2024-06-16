@@ -1,11 +1,7 @@
 import React from "react";
 import TV from "../assets/tv.png";
-import { Box } from "./Box";
 import useIsMobile, { useIsExactTabletWidth, useIsPad, useIsTablet } from "../../../hooks/useIsMobile";
-import RedirectButton from "../../../components/RedirectButton";
 import CurlyArrow from "../../../components/CurlyArrow";
-import GenerateButton from "./Buttons/GenerateButton";
-import ExploreButton from "./Buttons/ExploreButton";
 
 export default function ImageSection() {
   const isMobile = useIsMobile();
@@ -14,99 +10,68 @@ export default function ImageSection() {
   const sm_desk = useIsExactTabletWidth();
 
   return (
-    <div className="lg:mt-0 lg:flex relative">
-      {!isMobile && <IllustrativeCurlyArrow />}
-      {!isMobile && <IllustrativeButton />}
-      
-      <div className="relative">
-        <img src={TV} alt="mockup" className="z-20 relative" />
-        
-        {!isMobile && !isPad && !isTablet && !sm_desk && (
-          <iframe
-            className="z-40 aspect-video absolute top-[13%] left-[7%] w-[71%] h-[65%] rounded-lg"
-            src="https://www.youtube.com/embed/Vcd50FB1GVw"
-            title="YouTube video player"
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowFullScreen
-          ></iframe>
-        )}
+    <section className="h-auto py-12 mt-12">
+      <div className="w-full flex flex-col gap-3 lg:gap-8 items-center">
+        <h1 className="text-2xl text-center lg:text-4xl mb-8 font-bold">Watch out on <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-blue-500">YouTube</span></h1>
+        <CurlyArrow className={"w-[20%] lg:w-[10%] -rotate-45"} />
+        <div className="relative">
+          <img src={TV} alt="mockup" className="z-20 relative w-[800px]" />
+          {!isMobile && !isPad && !isTablet && !sm_desk && (
+            <iframe
+              className="z-30 aspect-video absolute top-[13%] left-[7%] w-[71%] h-[65%] rounded-lg"
+              src="https://www.youtube.com/embed/Vcd50FB1GVw"
+              title="YouTube video player"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+            ></iframe>
+          )}
 
-        {!isMobile && !isPad && isTablet && !sm_desk && (
-          <iframe
-            className="z-40 aspect-video absolute top-[53px] left-[42px] w-[442px] h-[262px] rounded-lg"
-            src="https://www.youtube.com/embed/Vcd50FB1GVw"
-            title="YouTube video player"
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowFullScreen
-          ></iframe>
-        )}
+          {!isMobile && !isPad && isTablet && !sm_desk && (
+            <iframe
+              className="z-30 aspect-video absolute top-[15%] left-[8%] w-[69%] h-[61%] rounded-lg"
+              src="https://www.youtube.com/embed/Vcd50FB1GVw"
+              title="YouTube video player"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+            ></iframe>
+          )}
 
-        {!isMobile && !isPad && !isTablet && sm_desk && (
-          <iframe
-            className="z-40 aspect-video absolute top-[43px] left-[36px] w-[381px] h-[230px] rounded-lg"
-            src="https://www.youtube.com/embed/Vcd50FB1GVw"
-            title="YouTube video player"
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowFullScreen
-          ></iframe>
-        )}
+          {!isMobile && !isPad && !isTablet && sm_desk && (
+            <iframe
+              className="z-30 aspect-video absolute top-[43px] left-[36px] w-[381px] h-[230px] rounded-lg"
+              src="https://www.youtube.com/embed/Vcd50FB1GVw"
+              title="YouTube video player"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+            ></iframe>
+          )}
 
-        {!isMobile && isPad && !sm_desk && (
-          <iframe
-            className="z-40 d-block aspect-video absolute top-[13%] left-[6.8%] w-[71%] h-[66%] rounded-lg"
-            src="https://www.youtube.com/embed/Vcd50FB1GVw"
-            title="YouTube video player"
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowFullScreen
-          ></iframe>
-        )}
+          {!isMobile && isPad && !sm_desk && (
+            <iframe
+              className="z-30 d-block aspect-video absolute top-[13%] left-[6.8%] w-[71%] h-[66%] rounded-lg"
+              src="https://www.youtube.com/embed/Vcd50FB1GVw"
+              title="YouTube video player"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+            ></iframe>
+          )}
 
-        {isMobile && (
-          <iframe
-            className="z-40 d-block aspect-video absolute top-[13%] left-[6.8%] w-[71%] h-[66%] rounded-lg"
-            src="https://www.youtube.com/embed/Vcd50FB1GVw"
-            title="YouTube video player"
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowFullScreen
-          ></iframe>
-        )}
+          {isMobile && (
+            <iframe
+              className="z-30 d-block aspect-video absolute top-[13%] left-[6.8%] w-[71%] h-[66%] rounded-lg"
+              src="https://www.youtube.com/embed/Vcd50FB1GVw"
+              title="YouTube video player"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+            ></iframe>
+          )}
+        </div>
       </div>
-      
-      {isMobile ? <MobileBoxes /> : null}
-    </div>
+    </section>
   );
 }
-
-const MobileBoxes = () => {
-  return (
-    <>
-      <Box
-        id="topbox"
-        className="w-64 bg-[#EEAB57] absolute -bottom-7 -right-32 z-10"
-      />
-      <Box
-        id="bottombox"
-        className="w-44 bg-[#DC5214] absolute -bottom-24 -left-32 z-10"
-      />
-    </>
-  );
-};
-
-const IllustrativeCurlyArrow = () => {
-  return (
-    <CurlyArrow className="h-32 w-32 z-10 absolute -bottom-10 -left-28" />
-  );
-};
-
-const IllustrativeButton = () => {
-  return (
-    <div className="absolute -bottom-8 -left-64 w-36">
-      <ExploreButton />
-    </div>
-  );
-};

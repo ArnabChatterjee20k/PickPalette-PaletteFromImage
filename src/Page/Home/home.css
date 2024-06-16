@@ -1,0 +1,4 @@
+.rfm-initial-child-container,.rfm-marquee{
+    display: flex !important;
+    align-items: end !important;
+}

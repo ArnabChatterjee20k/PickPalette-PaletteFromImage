@@ -1,7 +1,7 @@
 import React, { Suspense, lazy, useEffect } from "react";
 import Container from "./components/Container";
-import Navbar from "./layout/Navbar";
-import Footer from "./components/Footer";
+import NavBar from "./layout/NavBar";
+import Footer from './components/Footer';
 // import ImageUpload from "./Page/ImageUpload/ImageUpload";
 // import Home from "./Page/Home/assets/Home";
 
@@ -46,7 +46,7 @@ export default function App() {
             <Container>
               <Suspense fallback={<FallbackLoader />}>
                 <Routes>
-                  <Route element={<Navbar />}>
+                  <Route element={<NavBar/>}>
                     <Route path="/" element={<Home />} />
                     <Route path="/generate" element={<ImageUpload />} />
                     <Route path="/palettes" element={<Explore />} />
