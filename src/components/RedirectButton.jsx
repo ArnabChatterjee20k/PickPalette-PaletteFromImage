@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link } from "@remix-run/react";
 export default function RedirectButton({className,buttonTitle,link}) {
     return (
       <Link

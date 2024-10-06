@@ -1,6 +1,6 @@
 import { twMerge } from "tailwind-merge";
 import { APP_NAME } from "../../data/data";
-import { Link } from "react-router-dom";
+import { Link } from "@remix-run/react";
 
 export default function Logo({className,link}) {
   return (

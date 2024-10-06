@@ -1,10 +1,9 @@
 import React from "react";
 import { PassThrough } from "node:stream";
+import { renderToString } from "react-dom/server";
+import { ServerStyleSheet } from "styled-components";
 
-import type {
-  AppLoadContext,
-  EntryContext,
-} from "@remix-run/node";
+import type { AppLoadContext, EntryContext } from "@remix-run/node";
 import { createReadableStreamFromReadable } from "@remix-run/node";
 import { RemixServer } from "@remix-run/react";
 import { isbot } from "isbot";
@@ -41,26 +40,37 @@ function handleBotRequest(
   remixContext: EntryContext
 ) {
   return new Promise((resolve, reject) => {
+    const sheet = new ServerStyleSheet();
+
     const { pipe, abort } = renderToPipeableStream(
-      <RemixServer
-        context={remixContext}
-        url={request.url}
-        abortDelay={ABORT_DELAY}
-      />,
+      sheet.collectStyles(
+        <RemixServer
+          context={remixContext}
+          url={request.url}
+          abortDelay={ABORT_DELAY}
+        />
+      ),
       {
         onAllReady() {
           const body = new PassThrough();
 
           responseHeaders.set("Content-Type", "text/html");
 
+          const styles = sheet.getStyleTags();
+          const bodyWithStyles = new PassThrough();
+          bodyWithStyles.write(
+            "<!DOCTYPE html><html><head>" + styles + "</head><body>"
+          );
+          body.pipe(bodyWithStyles, { end: false });
+          body.on("end", () => {
+            bodyWithStyles.end("</body></html>");
+          });
+
           resolve(
-            new Response(
-              createReadableStreamFromReadable(body),
-              {
-                headers: responseHeaders,
-                status: responseStatusCode,
-              }
-            )
+            new Response(createReadableStreamFromReadable(bodyWithStyles), {
+              headers: responseHeaders,
+              status: responseStatusCode,
+            })
           );
 
           pipe(body);
@@ -86,26 +96,37 @@ function handleBrowserRequest(
   remixContext: EntryContext
 ) {
   return new Promise((resolve, reject) => {
+    const sheet = new ServerStyleSheet();
+
     const { pipe, abort } = renderToPipeableStream(
-      <RemixServer
-        context={remixContext}
-        url={request.url}
-        abortDelay={ABORT_DELAY}
-      />,
+      sheet.collectStyles(
+        <RemixServer
+          context={remixContext}
+          url={request.url}
+          abortDelay={ABORT_DELAY}
+        />
+      ),
       {
         onShellReady() {
           const body = new PassThrough();
 
           responseHeaders.set("Content-Type", "text/html");
 
+          const styles = sheet.getStyleTags();
+          const bodyWithStyles = new PassThrough();
+          bodyWithStyles.write(
+            "<!DOCTYPE html><html><head>" + styles + "</head><body>"
+          );
+          body.pipe(bodyWithStyles, { end: false });
+          body.on("end", () => {
+            bodyWithStyles.end("</body></html>");
+          });
+
           resolve(
-            new Response(
-              createReadableStreamFromReadable(body),
-              {
-                headers: responseHeaders,
-                status: responseStatusCode,
-              }
-            )
+            new Response(createReadableStreamFromReadable(bodyWithStyles), {
+              headers: responseHeaders,
+              status: responseStatusCode,
+            })
           );
 
           pipe(body);

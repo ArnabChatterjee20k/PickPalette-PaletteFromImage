@@ -7,7 +7,7 @@ import {
 } from "@remix-run/react";
 import type { LinksFunction } from "@remix-run/node";
 
-import styles from './tailwind.css';
+import styles from "./tailwind.css";
 
 export function links() {
   return [{ rel: "stylesheet", href: styles }];

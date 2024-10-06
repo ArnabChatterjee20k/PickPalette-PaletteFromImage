@@ -4,13 +4,18 @@ import getContrastingColor from "../../../utils/getContrastingColor";
 import { usePaletteConext } from "../cotext/paletteContext";
 import useColorClipboard from "../../../hooks/useColorClipboard";
 
-import {
-  LikeButton,
-  LivePreviewButton,
-  UsePaletteInProject,
-} from "../Components/Buttons";
+import { LikeButton, LivePreviewButton, UsePaletteInProject } from "./Buttons";
 
-const Item = styled.li`
+interface ItemProps {
+  color: string;
+  totalPalettes: number;
+}
+
+// @ts-ignore
+const MyStyled: typeof styled = typeof styled === 'function' ? styled : styled.default;
+
+
+const Item = MyStyled.li<ItemProps>`
   span {
     opacity: 0;
     font-weight: bold;
@@ -29,6 +34,7 @@ const Item = styled.li`
     opacity: 1;
   }
 `;
+
 
 export default function ColorPalette({ colors }) {
   const lastIndex = colors.length - 1;
@@ -55,9 +61,9 @@ export default function ColorPalette({ colors }) {
       <div className="flex justify-between">
         <div className="flex gap-3">
           <UsePaletteInProject />
-          <LivePreviewButton palettes={colors}/>
+          <LivePreviewButton palettes={colors} />
         </div>
-        <LikeButton palettes={colors}/>
+        <LikeButton palettes={colors} />
       </div>
     </div>
   );
@@ -67,6 +73,7 @@ const PaletteItem = ({ className, color, totalPalettes }) => {
   const isMobile = useIsMobile();
   const { defaultText, clickHandler } = useColorClipboard(color, "copied");
   return (
+    // @ts-ignore
     <Item
       totalPalettes={totalPalettes}
       color={color}

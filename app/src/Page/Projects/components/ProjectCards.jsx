@@ -5,7 +5,7 @@ import {
   PauseCircleIcon,
   RocketLaunchIcon,
 } from "@heroicons/react/24/outline";
-import { Link } from "react-router-dom";
+import { Link } from "@remix-run/react";
 export default function ProjectCards({ name, id }) {
   return (
     <li>

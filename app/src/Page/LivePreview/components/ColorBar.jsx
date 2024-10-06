@@ -1,13 +1,14 @@
 import { createContext, useContext, useLayoutEffect, useState } from "react";
-import pkg from "react-color";
-const { SketchPicker } = pkg;
+import * as pkg from "react-color"
+const {SketchPicker} = pkg
 import getContrastingColor from "../../../utils/getContrastingColor";
 import * as Menubar from "@radix-ui/react-menubar";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams } from "@remix-run/react";
 import { ChevronUpIcon } from "@heroicons/react/24/outline";
 import * as Popover from "@radix-ui/react-popover";
 import * as Tooltip from "@radix-ui/react-tooltip";
 import generateColorsOfDifferentCategory from "../../../utils/generateColorsOfDifferentCategory";
+import { ClientOnly } from "remix-utils/client-only"; // Import ClientOnly from Remix
 
 const colorGenerationOptions = [
   "Random",
@@ -20,7 +21,7 @@ const ColorContext = createContext();
 
 export default function ColorBar({ keys }) {
   const [colors, setColors] = useState({});
-  // using layouteffect to get the styles before rendering of the of dom on the screen
+  // Using layout effect to get the styles before rendering of the DOM on the screen
   useLayoutEffect(() => {
     const palettes = keys.reduce((prev, current) => {
       prev[current] = getComputedStyle(
@@ -30,9 +31,11 @@ export default function ColorBar({ keys }) {
     }, {});
     setColors(palettes);
   }, []);
+  
   function changePalette(colorVariable, newColor) {
     setColors((prevColors) => ({ ...prevColors, [colorVariable]: newColor }));
   }
+
   return (
     <div className="flex gap-[0.20rem] p-1 bg-gray-200 rounded-md flex-wrap">
       {Object.entries(colors).map(([colorVariable, color], idx) => (
@@ -48,8 +51,9 @@ export default function ColorBar({ keys }) {
   );
 }
 
-function ColorPicker({ colorVariable, currentColor, changePalette }) {
+export function ColorPicker({ colorVariable, currentColor, changePalette }) {
   const [params, setParams] = useSearchParams();
+
   function savePalette(newColor) {
     const paramsData = Array.from(params.entries()).reduce(
       (prev, [key, value]) => {
@@ -97,9 +101,10 @@ function ColorPicker({ colorVariable, currentColor, changePalette }) {
   );
 }
 
-function ShuffleButton() {
+export function ShuffleButton() {
   const [colorGenerationType, setColorGenerationType] = useState("random");
-  const [params, setSearhParams] = useSearchParams();
+  const [params, setSearchParams] = useSearchParams();
+
   return (
     <ColorContext.Provider
       value={{ colorGenerationType, setColorGenerationType }}
@@ -109,13 +114,13 @@ function ShuffleButton() {
           <button
             className="pl-3 pr-1"
             onClick={() =>
-              setSearhParams(
+              setSearchParams(
                 generateColorsOfDifferentCategory(colorGenerationType)
               )
             }
           >
             <svg
-              class="w-6 h-6 text-gray-800"
+              className="w-6 h-6 text-gray-800"
               aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -125,9 +130,9 @@ function ShuffleButton() {
             >
               <path
                 stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
                 d="M13.484 9.166 15 7h5m0 0-3-3m3 3-3 3M4 17h4l1.577-2.253M4 7h4l7 10h5m0 0-3 3m3-3-3-3"
               />
             </svg>
@@ -174,6 +179,7 @@ function ShuffleMenu() {
 function ColorMenu() {
   const { colorGenerationType, setColorGenerationType } =
     useContext(ColorContext);
+
   return (
     <Menubar.RadioGroup
       value={colorGenerationType}
@@ -193,5 +199,16 @@ function ColorMenu() {
         </Menubar.RadioItem>
       ))}
     </Menubar.RadioGroup>
+  );
+}
+
+// Use ClientOnly in the parent component where you render ColorBar
+export function App() {
+  const keys = ["primaryColor", "secondaryColor"]; // Example keys
+
+  return (
+    <ClientOnly>
+      <ColorBar keys={keys} />
+    </ClientOnly>
   );
 }
