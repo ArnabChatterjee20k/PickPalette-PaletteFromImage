@@ -5,7 +5,6 @@ export default {
     assetsBuildDirectory: "public/build",
     serverBuildPath: "build/index.js",
     publicPath: "/build/",
-    serverDependenciesToBundle: ["react-loader-spinner"],
     future: {
       v2_errorBoundary: true,
       v2_meta: true,
