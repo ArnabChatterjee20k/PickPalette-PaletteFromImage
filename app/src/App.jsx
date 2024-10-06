@@ -41,7 +41,7 @@ export default function App() {
     <>
       <>
         <>
-          <>
+          <Suspense>
             <Toaster toastOptions={{ position: "bottom-right" }} />
             <>
               <>
@@ -91,7 +91,7 @@ export default function App() {
               </>
             </>
             <Footer />
-          </>
+          </Suspense>
         </>
       </>
     </>
