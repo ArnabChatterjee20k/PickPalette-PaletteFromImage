@@ -5,10 +5,20 @@ import {
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react";
-import type { LinksFunction } from "@remix-run/node";
+import {
+  QueryClient,
+  QueryClientProvider,
+  HydrationBoundary,
+} from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 import styles from "./tailwind.css";
-
+import { useState } from "react";
+import { useDehydratedState } from "use-dehydrated-state";
+import { AuthContextProvider } from "./src/context/AuthContext";
+import { MemberModalContextProvider } from "./src/context/MemberModalContext";
+import { Toaster } from "react-hot-toast";
+import Container from "./src/components/Container";
 export function links() {
   return [{ rel: "stylesheet", href: styles }];
 }
@@ -32,5 +42,32 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
-  return <Outlet />;
+  const dehydratedState = useDehydratedState();
+  const [queryClient] = useState(
+    () =>
+      new QueryClient({
+        defaultOptions: {
+          queries: {
+            // With SSR, we usually want to set some default staleTime
+            // above 0 to avoid refetching immediately on the client
+            staleTime: 60 * 1000,
+          },
+        },
+      })
+  );
+  return (
+    <QueryClientProvider client={queryClient}>
+      <HydrationBoundary state={dehydratedState}>
+        <AuthContextProvider>
+          <MemberModalContextProvider>
+            <Container>
+              <Toaster toastOptions={{ position: "bottom-right" }} />
+              <Outlet />
+            </Container>
+          </MemberModalContextProvider>
+        </AuthContextProvider>
+      </HydrationBoundary>
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
+  );
 }

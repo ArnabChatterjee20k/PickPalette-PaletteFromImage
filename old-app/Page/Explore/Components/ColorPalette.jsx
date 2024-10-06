@@ -8,7 +8,7 @@ import {
   LikeButton,
   LivePreviewButton,
   UsePaletteInProject,
-} from "./Buttons";
+} from "../Components/Buttons";
 
 const Item = styled.li`
   span {

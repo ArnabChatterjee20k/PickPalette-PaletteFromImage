@@ -7,8 +7,8 @@ import Footer from "./components/Footer";
 
 const Home = lazy(() => import("./Page/Home/Home"));
 const ImageUpload = lazy(() => import("./Page/ImageUpload/ImageUpload"));
-const Explore = lazy(() => import("./Page/Explore/Explore"));
-const NotFound=lazy(()=>import("./Page/NotFound/NotFound"))
+// import Explore from "./Page/Explore/Explore";
+const NotFound = lazy(() => import("./Page/NotFound/NotFound"));
 
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
@@ -33,28 +33,32 @@ import { MemberModalContextProvider } from "./context/MemberModalContext";
 import Signin from "./Page/Signin/Signin";
 import Signup from "./Page/Signup/Signup";
 import LivePreview from "./Page/LivePreview/LivePreview";
+import fetchPalettes from "./utils/fetchPalettes";
 // import NotFound from "./Page/NotFound/NotFound";
 
 export default function App() {
   return (
     <>
-      <AuthContextProvider>
+      <>
         <>
-          <MemberModalContextProvider>
+          <>
             <Toaster toastOptions={{ position: "bottom-right" }} />
-            <Container>
+            <>
               <>
                 <Routes>
                   <Route element={<Navbar />}>
                     <Route path="/" element={<Home />} />
                     <Route path="/generate" element={<ImageUpload />} />
-                    <Route path="/palettes" element={<Explore />} />
+                    {/* <Route
+                      path="/palettes"
+                      element={<Explore />}
+                    /> */}
                     <Route path="/feedback" element={<Feedback />} />
                     <Route path="/subscribe">
                       <Route path="newsletter" element={<NewsLetter />} />
                     </Route>
                     <Route path="/preview" element={<LivePreview />} />
-                    <Route path="*" element={<NotFound/>} />
+                    <Route path="*" element={<NotFound />} />
                   </Route>
 
                   <Route path="/user" element={<DashboardNavbar />}>
@@ -68,18 +72,9 @@ export default function App() {
                       <Route path="projects" element={<Projects />}>
                         <Route path="" element={<ProjectViewer />} />
                       </Route>
-                      <Route
-                        path="favourites"
-                        element={<h1>{"text"}</h1>}
-                      />
-                      <Route
-                        path="keys"
-                        element={<h1>{"text"}</h1>}
-                      />
-                      <Route
-                        path="docs"
-                        element={<h1>{"text"}</h1>}
-                      />
+                      <Route path="favourites" element={<h1>{"text"}</h1>} />
+                      <Route path="keys" element={<h1>{"text"}</h1>} />
+                      <Route path="docs" element={<h1>{"text"}</h1>} />
                     </Route>
                     <Route
                       path="projects/:id"
@@ -94,11 +89,11 @@ export default function App() {
                   </Route>
                 </Routes>
               </>
-            </Container>
+            </>
             <Footer />
-          </MemberModalContextProvider>
+          </>
         </>
-      </AuthContextProvider>
+      </>
     </>
   );
 }
