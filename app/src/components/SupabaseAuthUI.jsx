@@ -6,7 +6,7 @@ import { PRODUCTION_ENV } from "../data/data";
 const redirectURI = PRODUCTION_ENV
   ? "https://pickpalette.netlify.app/feedback?q=feedback"
   : "http://localhost:5173/";
-export default function SupabaseAuth() {
+export default function SupabaseAuth({redirectURL}) {
   return (
     <Auth
       supabaseClient={supabaseClient}
@@ -15,7 +15,7 @@ export default function SupabaseAuth() {
         theme: ThemeSupa,
         className: { button: "text-[#34b27b] hover:text-white" },
       }}
-      redirectTo={redirectURI}
+      redirectTo={redirectURL || redirectURI}
     />
   );
 }

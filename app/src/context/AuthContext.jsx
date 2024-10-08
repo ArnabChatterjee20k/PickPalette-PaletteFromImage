@@ -6,27 +6,28 @@ export const useAuthContext = () => useContext(AuthContext);
 
 export const AuthContextProvider = ({ children }) => {
   const [session, setSession] = useState(null);
+
+  // initial session finding
   useEffect(() => {
-    const subscription = supabaseClient.auth.onAuthStateChange(
+    const getSession = async () => {
+      const { data: { session } } = await supabaseClient.auth.getSession();
+      setSession(session);
+    };
+
+    getSession();
+
+    const { data: subscription } = supabaseClient.auth.onAuthStateChange(
       (event, session) => {
         if (event === "SIGNED_OUT") {
           setSession(null);
-        }else if(event === 'INITIAL_SESSION'){
-          console.log("inital")
-        }
-         else if (event === "SIGNED_IN") {
-          console.log("signed_in")
+        } else if (event === "SIGNED_IN") {
           setSession(session);
-        } else if (session) {
-          supabaseClient.auth.setSession(session);
-        } else {
-          setSession(null);
         }
       }
     );
 
     return () => {
-      subscription.data.subscription.unsubscribe();
+      subscription.subscription.unsubscribe();
     };
   }, []);
 

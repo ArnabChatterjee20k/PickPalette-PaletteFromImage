@@ -3,6 +3,7 @@ import Hero from "./components/Hero";
 import FeedbackForm from "./components/FeedbackForm";
 import FeedbackBottomText from "./components/FeedbackBottomText";
 import FeedbackSection from "./components/FeedbackSection";
+import { ClientOnly } from "remix-utils/client-only";
 
 export default function Feedback() {
   return (
@@ -13,11 +14,10 @@ export default function Feedback() {
         <div className="max-w-[1400px] fixed bottom-0 right-0 left-0 flex justify-end">
           <FeedbackBottomText />
         </div>
-
-        <FeedbackForm />
+        <ClientOnly>{() => <FeedbackForm />}</ClientOnly>
         <div className="max-w-[1300px]">
           <FeedbackSection />
-        </div>
+          </div>
         {/* feedback cards like this https://supabase.com/docs/guides/functions card and you can get them from flowbite */}
       </div>
     </section>
