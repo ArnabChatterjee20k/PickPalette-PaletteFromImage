@@ -5,7 +5,7 @@ import FeedbackBottomText from "./components/FeedbackBottomText";
 import FeedbackSection from "./components/FeedbackSection";
 import { ClientOnly } from "remix-utils/client-only";
 
-export default function Feedback() {
+export default function Feedback({reviews}) {
   return (
     <section>
       <div className="flex flex-col w-full items-center m-auto">
@@ -16,7 +16,7 @@ export default function Feedback() {
         </div>
         <ClientOnly>{() => <FeedbackForm />}</ClientOnly>
         <div className="max-w-[1300px]">
-          <FeedbackSection />
+          <FeedbackSection reviews={reviews} />
           </div>
         {/* feedback cards like this https://supabase.com/docs/guides/functions card and you can get them from flowbite */}
       </div>

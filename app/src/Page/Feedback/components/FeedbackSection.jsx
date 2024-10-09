@@ -27,20 +27,16 @@ const comments = [
   },
 ];
 
-export default function FeedbackSection() {
-  const { data, isLoading, isFetched, isError } = useFeedbacks();
-  if (isLoading) return <ScrollLoader />;
-  else if (isFetched && !isError) {
-    return (
-      <Masonry
-        breakpointCols={breakpointColumnsObj}
-        className="my-masonry-grid px-5 my-5 flex-1"
-        columnClassName="my-masonry-grid_column"
-      >
-        {data?.map(({ id, feedback }) => (
-          <CommentCard key={id} comment={feedback} />
-        ))}
-      </Masonry>
-    );
-  }
+export default function FeedbackSection({ reviews }) {
+  return (
+    <Masonry
+      breakpointCols={breakpointColumnsObj}
+      className="my-masonry-grid px-5 my-5 flex-1"
+      columnClassName="my-masonry-grid_column"
+    >
+      {reviews?.map(({ id, feedback }) => (
+        <CommentCard key={id} comment={feedback} />
+      ))}
+    </Masonry>
+  );
 }
