@@ -1,11 +1,11 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { savePalette, unSavePalette } from "../../../utils/paletteOperation";
 import toast from "react-hot-toast";
 import useUserAccessToken from "../../../hooks/useUserAccessToken";
-import { queryClient } from "../../../queryClient/queryClient";
 import { useMemberModalContext } from "../../../context/MemberModalContext";
 
 export function mutateSavePalette(palettes) {
+  const queryClient = useQueryClient()
   const userToken = useUserAccessToken();
   const key = ["saved-palettes", userToken];
   const {handleModalOpen} = useMemberModalContext()
