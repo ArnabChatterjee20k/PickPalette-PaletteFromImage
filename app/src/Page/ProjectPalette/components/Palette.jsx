@@ -1,4 +1,4 @@
-import pkg from 'react-color';
+import * as pkg from 'react-color';
 const { SketchPicker } = pkg;
 import getContrastingColor from "../../../utils/getContrastingColor";
 import getContrastingHoverBackground from "../../../utils/getContrastingHoverBackground";
