@@ -49,7 +49,7 @@ export default function Explore({ initialData }) {
 
   return (
     <PaletteContextProvider lastPaletteReference={lastPaletteRef}>
-      <section className="flex min-h-screen flex-col items-center">
+      <section className="flex min-h-screen flex-col items-center mt-16">
         {isLoading && <Loader />}
         <div className="w-fit mb-auto px-4 py-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 justify-items-center gap-y-6 gap-x-10">
           {paletteData?.pages.flatMap((page, pageIndex) =>

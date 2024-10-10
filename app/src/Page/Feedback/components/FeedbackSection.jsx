@@ -40,3 +40,38 @@ export default function FeedbackSection({ reviews }) {
     </Masonry>
   );
 }
+export function SkeletonFeedbackSection() {
+  return (
+    <>
+      <Masonry
+        breakpointCols={breakpointColumnsObj}
+        className="my-masonry-grid px-5 my-5 flex-1"
+        columnClassName="my-masonry-grid_column"
+      >
+        {Array.from({ length: 6 }).map((_, index) => (
+          <SkeletonCommentCard key={index} />
+        ))}
+      </Masonry>
+    </>
+  );
+}
+
+// Skeleton for individual CommentCard with random heights
+const SkeletonCommentCard = () => {
+  // Generate random heights for simulating different content sizes
+  const randomHeight1 = Math.floor(Math.random() * 40) + 40; // height between 40px and 80px
+  const randomHeight2 = Math.floor(Math.random() * 20) + 20; // height between 20px and 40px
+
+  return (
+    <div className="p-6 border rounded-lg bg-[#0D1117] border-gray-700 shadow-lg min-w-[14rem] animate-pulse">
+      <div
+        className="bg-gray-600 rounded mb-4"
+        style={{ height: `${randomHeight1}px`, width: "100%" }}
+      ></div>
+      <div
+        className="bg-gray-600 rounded"
+        style={{ height: `${randomHeight2}px`, width: "50%" }}
+      ></div>
+    </div>
+  );
+};

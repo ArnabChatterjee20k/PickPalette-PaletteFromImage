@@ -1,0 +1,7 @@
+.paletteItem:hover {
+  width: var(--hover-width) !important;
+}
+
+.paletteItem:hover span {
+  opacity: 1 !important;
+}

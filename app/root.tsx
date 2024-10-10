@@ -19,10 +19,12 @@ import { AuthContextProvider } from "./src/context/AuthContext";
 import { MemberModalContextProvider } from "./src/context/MemberModalContext";
 import { Toaster } from "react-hot-toast";
 import Container from "./src/components/Container";
-export function links() {
-  return [{ rel: "stylesheet", href: styles }];
-}
-
+import { cssBundleHref } from "@remix-run/css-bundle";
+import { LinksFunction } from "@remix-run/node";
+export const links: LinksFunction = () => [
+  ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
+  { rel: "stylesheet", href: styles },
+];
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className="dark">
@@ -31,7 +33,6 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
         <Links />
-        {typeof document === "undefined" ? "__STYLES__" : null}
       </head>
       <body className="dark">
         {children}

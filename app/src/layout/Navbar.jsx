@@ -11,16 +11,19 @@ import { useMemberModalContext } from "../context/MemberModalContext";
 import { useAuthContext } from "../context/AuthContext";
 import GithubIcon from "../components/GithubIcon";
 import ProductHuntIcon from "../components/ProductHuntIcon";
+import { twMerge } from "tailwind-merge";
 
 const PRODUCTHUNT_LINK =
   "https://www.producthunt.com/products/pickpalette?utm_source=badge-featured&utm_medium=badge#pickpalette";
 const GITHUB_LINK =
   "https://github.com/ArnabChatterjee20k/PickPalette-PaletteFromImage";
 
-export default function Navbar() {
+export default function Navbar({ className }) {
   return (
     <>
-      <NavContainer className="sticky top-0 left-0 right-0 z-50">
+      <NavContainer
+        className={twMerge("sticky top-0 left-0 right-0 z-50", className)}
+      >
         <div className="flex max-w-[1568px] items-center w-full m-auto px-8 pb-3 pt-5 shadow-sm">
           <Logo />
           <div className="hidden sm:flex items-center gap-2 ml-10">
