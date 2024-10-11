@@ -1,17 +1,26 @@
 {
-    "include": ["remix.env.d.ts", "**/*.ts", "**/*.tsx", "app/src/Page/ImageUpload/Components/ColorViewer.jsx", "app/src/Page/LivePreview/components/ColorBar.jsx", "app/src/Page/LivePreview/components/ColorBar.jsx"],
-    "compilerOptions": {
-      "lib": ["DOM", "DOM.Iterable", "ES2022"],
-      "isolatedModules": true,
-      "esModuleInterop": true,
-      "jsx": "react-jsx",
-      "resolveJsonModule": true,
-      "moduleResolution": "Bundler",
-      "baseUrl": ".",
-      "noEmit": true,
-      "paths": {
-        "~/*": ["./app/*"]
-      }
-    }
+  "include": [
+    "remix.env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "app/src/Page/ImageUpload/Components/ColorViewer.jsx",
+    "app/src/Page/LivePreview/components/ColorBar.jsx",
+    "app/src/Page/LivePreview/components/ColorBar.jsx"
+  ],
+  "compilerOptions": {
+    "lib": ["DOM", "DOM.Iterable", "ES2022"],
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "jsx": "react-jsx",
+    "resolveJsonModule": true,
+    "moduleResolution": "Bundler",
+    "baseUrl": ".",
+    "noEmit": true,
+    "paths": {
+      "~/*": ["./app/*"]
+    },
+    "types": ["@remix-run/node", "vite/client"],
+    "skipLibCheck": true,
+    "module": "ESNext"
   }
-  
+}

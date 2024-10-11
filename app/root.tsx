@@ -12,17 +12,15 @@ import {
 } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
-import styles from "./tailwind.css";
+import styles from "./tailwind.css?url";
 import { useState } from "react";
 import { useDehydratedState } from "use-dehydrated-state";
 import { AuthContextProvider } from "./src/context/AuthContext";
 import { MemberModalContextProvider } from "./src/context/MemberModalContext";
 import { Toaster } from "react-hot-toast";
 import Container from "./src/components/Container";
-import { cssBundleHref } from "@remix-run/css-bundle";
 import { LinksFunction } from "@remix-run/node";
 export const links: LinksFunction = () => [
-  ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
   { rel: "stylesheet", href: styles },
 ];
 export function Layout({ children }: { children: React.ReactNode }) {

@@ -12,7 +12,6 @@ const NotFound = lazy(() => import("./Page/NotFound/NotFound"));
 
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
-import { ErrorBoundary } from "react-error-boundary";
 import NewsLetter from "./Page/NewsLetter/NewsLetter";
 
 import { Toaster } from "react-hot-toast";

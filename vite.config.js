@@ -1,7 +1,23 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import { vitePlugin as remix } from "@remix-run/dev";
+import { defineConfig } from "vite";
+import tsconfigPaths from "vite-tsconfig-paths";
 
-// https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
-})
+  plugins: [
+    // options from the remix.config
+    remix({
+      ignoredRouteFiles: ["**/.*"],
+      appDirectory: "app",
+      assetsBuildDirectory: "public/build",
+      serverBuildPath: "build/index.js",
+      publicPath: "/build/",
+      future: {
+        v2_errorBoundary: true,
+        v2_meta: true,
+        v2_normalizeFormMethod: true,
+        v2_routeConvention: true,
+      },
+    }),
+    tsconfigPaths(),
+  ],
+});
