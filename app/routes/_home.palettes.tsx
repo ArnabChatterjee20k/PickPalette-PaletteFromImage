@@ -1,5 +1,5 @@
 import fetchPalettes from "~/src/utils/fetchPalettes";
-import { json } from "@remix-run/node";
+import { json } from "@netlify/remix-runtime";
 import Explore from "~/src/Page/Explore/Explore";
 import { useLoaderData } from "@remix-run/react";
 export async function loader() {

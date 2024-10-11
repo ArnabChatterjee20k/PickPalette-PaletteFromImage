@@ -12,6 +12,9 @@
   "dependencies": {
     "@headlessui/react": "^1.7.14",
     "@heroicons/react": "^2.1.1",
+    "@netlify/edge-functions": "^2.11.0",
+    "@netlify/remix-edge-adapter": "^3.4.2",
+    "@netlify/remix-runtime": "^2.3.1",
     "@radix-ui/react-alert-dialog": "^1.0.5",
     "@radix-ui/react-dialog": "^1.1.2",
     "@radix-ui/react-dropdown-menu": "^2.0.6",

@@ -1,4 +1,4 @@
-import { defer, json, LoaderFunctionArgs } from "@remix-run/node";
+import { defer, json, LoaderFunctionArgs } from "@netlify/remix-runtime";
 import { Await, useLoaderData, useRouteError } from "@remix-run/react";
 import { Suspense } from "react";
 import { createSupabaseServerClient } from "~/src/client/supabase.server";

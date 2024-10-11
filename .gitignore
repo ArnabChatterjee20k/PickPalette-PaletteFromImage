@@ -28,3 +28,5 @@ node_modules
 /build
 .env
 public/
+# Local Netlify folder
+.netlify
