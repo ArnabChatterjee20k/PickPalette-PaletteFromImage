@@ -35,7 +35,7 @@ export default function Signup() {
               divider: "hidden",
               button:
                 "w-full text-[#ffffff] hover:text-white bg-transparent border border-[#4a72f7] hover:bg-[#4671ff] focus:ring-4 focus:ring-blue-500",
-              input: "text-[#fff]",
+              input: "text-black",
             },
           }}
         />
